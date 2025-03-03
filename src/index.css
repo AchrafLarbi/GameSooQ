@@ -5,5 +5,5 @@
 @tailwind utilities;
 
 body {
-  font-family: "Space Grotesk";
+  font-family: "Poppins", sans-serif;
 }
