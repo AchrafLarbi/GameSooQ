@@ -1,5 +1,6 @@
 import Header from "../components/layout/Header";
 import AcceuilPage from "../components/AcceuilPage";
+import AcceuilPageMiddle from "../components/AcceuilPageMiddle";
 // import Services from "../components/Services";
 // import Galerie from "../components/Galerie";
 // import FeedbackForm from "../components/FeedbackForm";
@@ -26,6 +27,7 @@ const LandingPage = () => {
       {/* Main Content */}
       <main>
         <AcceuilPage />
+        <AcceuilPageMiddle />
         {/* <Services /> */}
         {/* <Galerie />
         {/* <Contact /> */}
