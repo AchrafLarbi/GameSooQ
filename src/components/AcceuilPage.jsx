@@ -17,12 +17,12 @@ const AcceuilPage = () => {
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center w-full px-4 mt-16 sm:mt-20 lg:mt-28">
-        <div className="w-full text-center mx-auto">
-          <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full px-4  sm:mt-20 lg:mt-28 mb-32">
+        <div className="w-full text-center mx-auto mt-52 ">
+          <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold ">
             ACHETEZ, VENDEZ & ÉCHANGEZ DES JEUX ET CONSOLES
           </h1>
-          <p className="text-white text-lg sm:text-lg lg:text-2xl mt-4 leading-relaxed text-balance mx-auto px-4 sm:px-8 lg:px-0 lg:mx-60 ">
+          <p className="text-white text-lg sm:text-lg lg:text-2xl mt-4 leading-relaxed mx-auto sm:px-8 lg:px-0 lg:mx-60">
             Trouvez de bonnes affaires, échangez vos jeux et connectez-vous avec
             d'autres joueurs en Algérie. Vendez votre ancienne console, échangez
             des jeux ou discutez avec d'autres joueurs, tout en un seul endroit
@@ -89,6 +89,7 @@ const AcceuilPage = () => {
           </a>
         </div>
       </div>
+      <AcceuilPageMiddle />
     </section>
   );
 };

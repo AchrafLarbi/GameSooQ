@@ -7,3 +7,38 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+/* styles.css or index.css */
+
+/* Custom Keyframe for smooth continuous wave animation */
+@keyframes wave {
+  0% {
+    stroke-dashoffset: 100%; /* Start off completely invisible */
+  }
+  100% {
+    stroke-dashoffset: 0%; /* End fully drawn */
+  }
+}
+
+/* Tailwind class for continuous wave animation */
+.path-animate {
+  stroke-dasharray: 100%;
+  stroke-dashoffset: 100%;
+  animation: wave 3.5s ease-in-out infinite; /* Infinite smooth wave effect */
+  stroke-linecap: round; /* Ensure rounded corners of the path */
+}
+
+.path-animate:nth-child(1) {
+  animation-delay: 0s;
+}
+.path-animate:nth-child(2) {
+  animation-delay: 0.5s;
+}
+.path-animate:nth-child(3) {
+  animation-delay: 1s;
+}
+.path-animate:nth-child(4) {
+  animation-delay: 1.5s;
+}
+.path-animate:nth-child(5) {
+  animation-delay: 2s;
+}

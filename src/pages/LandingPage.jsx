@@ -27,7 +27,7 @@ const LandingPage = () => {
       {/* Main Content */}
       <main>
         <AcceuilPage />
-        <AcceuilPageMiddle />
+        {/* <AcceuilPageMiddle /> */}
         {/* <Services /> */}
         {/* <Galerie />
         {/* <Contact /> */}
