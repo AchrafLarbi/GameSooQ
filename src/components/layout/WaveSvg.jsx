@@ -1,12 +1,10 @@
 const WaveSvg = () => {
   return (
     <svg
-      width="686"
-      height="1300"
       viewBox="0 0 686 1162"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute left-0 top-1/5 md:top-1/4 -translate-y-1/2 path-animate"
+      className="absolute left-0 top-1/5 md:top-1/4 -translate-y-1/2 w-1/2 path-animate "
     >
       <path
         d="M-93.5179 964.058C-114.626 735.875 -132.549 374.376 123.388 497.263C449.086 653.644 513.107 1216.74 661.981 922.811"

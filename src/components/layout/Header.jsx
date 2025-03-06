@@ -17,30 +17,28 @@ const Header = () => {
       {/* Blur Background */}
       <div className="absolute inset-0 backdrop-blur shadow-md z-[-1]"></div>
 
-      <div className="flex justify-center items-center backdrop-blur w-full h-[80px] px-4">
-        <div className="relative flex justify-between items-center w-full max-w-[1200px]">
-          {/* Logo */}
-          <div className="ml-4 lg:ml-16 flex items-center lg:relative lg:left-0 lg:transform-none absolute left-1/2 transform -translate-x-1/2">
-            <img
-              src={header_icon || "/placeholder.svg"}
-              alt="Logo"
-              className="w-28"
-            />
-          </div>
+      <div className="flex justify-between items-center backdrop-blur w-full h-[80px] pl-40 ">
+        {/* Logo - Positioned to the very left */}
+        <div className="absolute left-0 flex items-center pl-20">
+          <img
+            src={header_icon || "/placeholder.svg"}
+            alt="Logo"
+            className="w-40 max-w-full"
+          />
+        </div>
 
-          {/* Hamburger Menu for Mobile and Tablet */}
-          <button
-            className="lg:hidden text-white p-2 absolute left-4"
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+        {/* Hamburger Menu for Mobile and Tablet */}
+        <button
+          className="lg:hidden text-white p-2 absolute left-[100px]"
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:block">
-            <MenuBar />
-          </div>
+        {/* Desktop Menu - Centered */}
+        <div className="hidden lg:flex justify-center  w-full">
+          <MenuBar />
         </div>
       </div>
 

@@ -9,22 +9,25 @@ body {
 }
 /* styles.css or index.css */
 
-/* Custom Keyframe for smooth continuous wave animation */
+/* Custom Keyframe for continuous wave animation */
 @keyframes wave {
   0% {
-    stroke-dashoffset: 100%; /* Start off completely invisible */
+    stroke-dashoffset: 200%;
+  }
+  50% {
+    stroke-dashoffset: 0%;
   }
   100% {
-    stroke-dashoffset: 0%; /* End fully drawn */
+    stroke-dashoffset: 200%;
   }
 }
 
-/* Tailwind class for continuous wave animation */
+/* Tailwind class for a smooth back-and-forth wave animation */
 .path-animate {
-  stroke-dasharray: 100%;
-  stroke-dashoffset: 100%;
-  animation: wave 3.5s ease-in-out infinite; /* Infinite smooth wave effect */
-  stroke-linecap: round; /* Ensure rounded corners of the path */
+  stroke-dasharray: 200%;
+  stroke-dashoffset: 200%;
+  animation: wave 3.5s ease-in-out infinite alternate;
+  stroke-linecap: round;
 }
 
 .path-animate:nth-child(1) {

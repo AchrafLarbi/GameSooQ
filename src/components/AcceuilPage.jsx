@@ -20,46 +20,40 @@ const AcceuilPage = () => {
       <div className="relative z-10 flex flex-col items-center justify-center w-full px-4  sm:mt-20 lg:mt-28 mb-32">
         <div className="w-full text-center mx-auto mt-52 ">
           <h1 className="text-white text-3xl sm:text-4xl lg:text-5xl font-bold ">
-            ACHETEZ, VENDEZ & ÉCHANGEZ DES JEUX ET CONSOLES
+            Jouez sans limites !
           </h1>
-          <p className="text-white text-lg sm:text-lg lg:text-2xl mt-4 leading-relaxed mx-auto sm:px-8 lg:px-0 lg:mx-60">
-            Trouvez de bonnes affaires, échangez vos jeux et connectez-vous avec
-            d'autres joueurs en Algérie. Vendez votre ancienne console, échangez
-            des jeux ou discutez avec d'autres joueurs, tout en un seul endroit
-            !
+          <p className="text-white text-xl sm:text-lg lg:text-3xl mt-4 leading-relaxed mx-auto sm:px-8 lg:px-0 lg:mx-60">
+            Ne laissez plus vos anciens jeux prendre la poussière. Échangez-les,
+            vendez-les ou trouvez les derniers titres au meilleur prix. Avec
+            GameSooq, le gaming n’a plus de limites !
           </p>
         </div>
 
+        <div className="w-full text-center mx-auto mt-10 ">
+          <p className="text-white  sm:text-lg lg:text-2xl mt-4 leading-relaxed mx-auto sm:px-8 lg:px-0 lg:mx-60">
+            Gamsooq est maintenant disponible sur
+          </p>
+        </div>
         {/* Download Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 sm:mt-10">
           <a
             href="#download-android"
             className="group bg-[#FF5733] hover:bg-white hover:text-[#FF5733] hover:border-[#FF5733] text-white font-medium py-3 px-8 sm:px-10 lg:px-16 rounded-full flex items-center justify-center gap-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:translate-y-[-2px] active:translate-y-[1px] w-full sm:w-auto border-2 border-transparent"
           >
-            <span className="transition-colors duration-300">Google Play</span>
+            <span className="transition-colors duration-300">Télécharger</span>
             <svg
-              width="19"
-              height="20"
-              viewBox="0 0 19 20"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="transition-colors duration-300"
             >
               <path
-                d="M0.839437 1.1056C0.624429 1.32504 0.5 1.6667 0.5 2.10916V17.8914C0.5 18.3338 0.624429 18.6755 0.839437 18.8949L0.892504 18.9431L9.96309 10.1029V9.89412L0.892504 1.05386L0.839437 1.1056Z"
-                className="fill-white group-hover:fill-[#FF5733] transition-colors duration-300"
-              />
-              <path
-                d="M14.0811 13.0511L11.0609 10.1028V9.89411L14.0847 6.94587L14.1525 6.98423L17.7335 8.97083C18.7555 9.53461 18.7555 10.4623 17.7335 11.0297L14.1525 13.0127L14.0811 13.0511Z"
-                className="fill-white group-hover:fill-[#FF5733] transition-colors duration-300"
-              />
-              <path
-                d="M13.6036 13.5617L10.512 10.5475L1.38837 19.4439C1.7278 19.7918 2.28134 19.8337 2.91081 19.4858L13.6036 13.5617Z"
-                className="fill-white group-hover:fill-[#FF5733] transition-colors duration-300"
-              />
-              <path
-                d="M13.6036 6.43527L2.91081 0.511143C2.28134 0.16681 1.7278 0.208735 1.38837 0.556636L10.512 9.44952L13.6036 6.43527Z"
-                className="fill-white group-hover:fill-[#FF5733] transition-colors duration-300"
+                d="M9 8.25H7.5C6.25736 8.25 5.25 9.25736 5.25 10.5V19.5C5.25 20.7426 6.25736 21.75 7.5 21.75H16.5C17.7426 21.75 18.75 20.7426 18.75 19.5V10.5C18.75 9.25736 17.7426 8.25 16.5 8.25H15M9 12L12 15M12 15L15 12M12 15L12 2.25"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </a>
@@ -68,22 +62,29 @@ const AcceuilPage = () => {
             href="#download-ios"
             className="group bg-[#FF5733] hover:bg-white hover:text-[#FF5733] hover:border-[#FF5733] text-white font-medium py-3 px-8 sm:px-10 lg:px-16 rounded-full flex items-center justify-center gap-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:translate-y-[-2px] active:translate-y-[1px] w-full sm:w-auto border-2 border-transparent"
           >
-            <span className="transition-colors duration-300">App Store</span>
+            <span className="transition-colors duration-300 ">
+              Regarder la vidéo
+            </span>
             <svg
-              width="18"
-              height="22"
-              viewBox="0 0 18 22"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="transition-colors duration-300"
             >
               <path
-                d="M15.0341 11.6859C15.009 8.96075 17.3227 7.63495 17.4285 7.57323C16.1181 5.71051 14.0871 5.45601 13.3734 5.43571C11.6676 5.26069 10.0129 6.43091 9.144 6.43091C8.2577 6.43091 6.91959 5.45263 5.47741 5.48137C3.62157 5.50928 1.88541 6.55689 0.933206 8.1837C-1.0319 11.5007 0.433691 16.3752 2.31641 19.0564C3.25821 20.3695 4.35871 21.8357 5.79915 21.7841C7.20837 21.7275 7.73477 20.9082 9.43538 20.9082C11.1204 20.9082 11.6147 21.7841 13.0838 21.7512C14.5962 21.7275 15.5484 20.4321 16.4572 19.1072C17.5456 17.6021 17.9827 16.1199 18 16.0438C17.9644 16.032 15.0627 14.9522 15.0341 11.6859Z"
-                className="fill-white group-hover:fill-[#FF5733] transition-colors duration-300"
+                d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
               <path
-                d="M12.259 3.67193C13.017 2.74776 13.5356 1.49045 13.3916 0.214539C12.2946 0.261889 10.9227 0.954382 10.1326 1.85826C9.43365 2.65475 8.80925 3.96026 8.97056 5.18797C10.2029 5.2776 11.4681 4.58172 12.259 3.67193Z"
-                className="fill-white group-hover:fill-[#FF5733] transition-colors duration-300"
+                d="M15.9099 11.6722C16.1671 11.8151 16.1671 12.1849 15.9099 12.3278L10.3071 15.4405C10.0572 15.5794 9.75 15.3986 9.75 15.1127V8.88732C9.75 8.60139 10.0572 8.42065 10.3071 8.55951L15.9099 11.6722Z"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </a>

@@ -6,9 +6,10 @@ const MenuBar = ({ isMobile = false }) => {
   const menuItems = useMemo(
     () => [
       { label: "Accueil", sectionId: "acceuil", path: "/" },
-      { label: "Fonctionnalités", sectionId: "fonctionnalités" },
-      { label: "Screenshots", sectionId: "screenshots" },
+      { label: "Caractéristiques", sectionId: "caracteristiques" },
+      { label: "Fonctionnalités", sectionId: "fonctionnalites" },
       { label: "Contactez-nous", sectionId: "contactez-nous" },
+      { label: "FAQ", sectionId: "faq" },
       { label: "Télécharger", sectionId: "télécharger" },
     ],
     []
