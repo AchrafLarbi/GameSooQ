@@ -17,34 +17,36 @@ const Header = () => {
       {/* Blur Background */}
       <div className="absolute inset-0 backdrop-blur shadow-md z-[-1]"></div>
 
-      <div className="flex justify-between items-center backdrop-blur w-full h-[80px] pl-40 ">
-        {/* Logo - Positioned to the very left */}
-        <div className="absolute left-0 flex items-center pl-20">
-          <img
-            src={header_icon || "/placeholder.svg"}
-            alt="Logo"
-            className="w-40 max-w-full"
-          />
-        </div>
+      <div className="flex justify-center items-center backdrop-blur w-full h-[80px]  gap-10">
+        <div className="relative flex justify-between items-center w-full max-w-[1200px]">
+          {/* Logo - Increased Size */}
+          <div className=" p-4 flex items-center xl:relative xl:left-0 xl:transform-none absolute left-1/2 transform -translate-x-1/2">
+            <img
+              src={header_icon || "/placeholder.svg"}
+              alt="Logo"
+              className="w-60 max-w-[150%] " // Increased the size
+            />
+          </div>
 
-        {/* Hamburger Menu for Mobile and Tablet */}
-        <button
-          className="lg:hidden text-white p-2 absolute left-[100px]"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Hamburger Menu (Now Hidden on 1280px+) */}
+          <button
+            className="xl:hidden text-white p-2 absolute left-4"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
 
-        {/* Desktop Menu - Centered */}
-        <div className="hidden lg:flex justify-center  w-full">
-          <MenuBar />
+          {/* Desktop Menu (Visible Only on 1280px+) */}
+          <div className="hidden xl:block xl:ml-16">
+            <MenuBar />
+          </div>
         </div>
       </div>
 
-      {/* Mobile and Tablet Menu */}
+      {/* Mobile and Tablet Menu (Now Applies to <1280px) */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed top-[80px] backdrop-blur left-0 w-full z-50">
+        <div className="xl:hidden fixed top-[80px] backdrop-blur left-0 w-full z-50">
           <MenuBar isMobile={true} closeMenu={() => setIsMenuOpen(false)} />
         </div>
       )}
