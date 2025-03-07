@@ -18,9 +18,9 @@ const Header = () => {
       <div className="absolute inset-0 backdrop-blur shadow-md z-[-1]"></div>
 
       <div className="flex justify-center items-center backdrop-blur w-full h-[80px]  gap-10">
-        <div className="relative flex justify-between items-center w-full max-w-[1200px]">
+        <div className="relative flex items-center w-full px-4 xl:px-0">
           {/* Logo - Increased Size */}
-          <div className=" p-4 flex items-center xl:relative xl:left-0 xl:transform-none absolute left-1/2 transform -translate-x-1/2">
+          <div className=" p-4 xl:ml-10 flex items-center justify-center xl:justify-start w-full">
             <img
               src={header_icon || "/placeholder.svg"}
               alt="Logo"
@@ -38,7 +38,7 @@ const Header = () => {
           </button>
 
           {/* Desktop Menu (Visible Only on 1280px+) */}
-          <div className="hidden xl:block xl:ml-16">
+          <div className="hidden xl:block xl:mr-16">
             <MenuBar />
           </div>
         </div>

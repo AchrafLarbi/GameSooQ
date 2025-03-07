@@ -72,8 +72,14 @@ const MenuBar = ({ isMobile = false }) => {
         {menuItems.map((item, index) => (
           <button
             key={index}
+            onClick={() => {
+              const section = document.getElementById(item.sectionId);
+              if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
             className={`relative transition-colors ${
-              isMobile ? "w-full" : "text-lg" // Make the font size larger on desktop as well
+              isMobile ? "w-full" : "text-lg"
             } text-center p-2 ${
               activeIndex === index ? "text-[#FF5733]" : "text-white"
             } hover:text-[#FF5733]`}
@@ -81,7 +87,7 @@ const MenuBar = ({ isMobile = false }) => {
             <span className="relative">
               {item.label}
               <span
-                className={`absolute left-0 bottom-[-2px] w-full h-[2px] bg-[#FF5733]  text-[#FF5733] transition-transform ${
+                className={`absolute left-0 bottom-[-2px] w-full h-[2px] bg-[#FF5733] transition-transform ${
                   activeIndex === index ? "scale-x-100" : "scale-x-0"
                 } hover:scale-x-100 origin-left`}
               ></span>
