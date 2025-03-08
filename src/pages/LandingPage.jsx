@@ -1,7 +1,11 @@
 import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 import AcceuilPage from "../components/AcceuilPage";
-import Caracteristiques from "../components/Caracteristiques";
+import Download from "../components/Download";
+import FAQsection from "../components/FAQSection";
 import Fonctionnalites from "../components/Fonctionnalites";
+import Caracteristiques from "../components/Caracteristiques";
+// import Services from "../components/Services";
 // import Galerie from "../components/Galerie";
 // import FeedbackForm from "../components/FeedbackForm";
 // import LocalisationSection from "../components/Localisation";
@@ -33,9 +37,10 @@ const LandingPage = () => {
         {/* <LocalisationSection />  */}
         {/* <FeedbackForm />  */}
       </main>
-
+      <FAQsection />
+      <Download />
       {/* Footer Component */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
