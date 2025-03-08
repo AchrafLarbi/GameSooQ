@@ -8,7 +8,7 @@ import foncImg4 from "../assets/mockup/fonc_phone4.png";
 import foncImg5 from "../assets/mockup/fonc_phone5.png";
 import foncImg6 from "../assets/mockup/fonc_phone6.png";
 
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 const FeaturesSection = () => {
   const features = [
@@ -90,7 +90,7 @@ const FeaturesSection = () => {
 
                 <div className="relative flex flex-col items-center justify-center">
                   {/* Mobile image with animation */}
-                  <motion.div
+                  <Motion.div
                     initial="hidden"
                     animate="visible"
                     variants={{
@@ -103,7 +103,7 @@ const FeaturesSection = () => {
                       },
                     }}
                   >
-                    <motion.div
+                    <Motion.div
                       className="relative z-10"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{
@@ -122,7 +122,7 @@ const FeaturesSection = () => {
                         },
                       }}
                     >
-                      <motion.img
+                      <Motion.img
                         src={feature.img || "/placeholder.svg"}
                         alt="GameSooq Mobile App Interface"
                         className="w-7/12 max-w-md mx-auto"
@@ -137,8 +137,8 @@ const FeaturesSection = () => {
                           transition: { duration: 0.3 },
                         }}
                       />
-                    </motion.div>
-                  </motion.div>
+                    </Motion.div>
+                  </Motion.div>
                 </div>
               </div>
 

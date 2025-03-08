@@ -1,6 +1,6 @@
 import mobileApp from "../assets/mockup/cara_phone.png";
 import CaraSvg from "./layout/CaraSvg";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 
 const Caracteristiques = () => {
   return (
@@ -145,7 +145,7 @@ const Caracteristiques = () => {
 
             <div className="relative lg:h-full flex flex-col items-center justify-center">
               {/* Mobile image with animation */}
-              <motion.div
+              <Motion.div
                 initial="hidden"
                 animate="visible"
                 variants={{
@@ -158,7 +158,7 @@ const Caracteristiques = () => {
                   },
                 }}
               >
-                <motion.div
+                <Motion.div
                   className="relative z-10"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{
@@ -177,7 +177,7 @@ const Caracteristiques = () => {
                     },
                   }}
                 >
-                  <motion.img
+                  <Motion.img
                     src={mobileApp || "/placeholder.svg"}
                     alt="GameSooq Mobile App Interface"
                     className="w-10/12 max-w-md mx-auto"
@@ -192,8 +192,8 @@ const Caracteristiques = () => {
                       transition: { duration: 0.3 },
                     }}
                   />
-                </motion.div>
-              </motion.div>
+                </Motion.div>
+              </Motion.div>
             </div>
           </div>
         </div>
