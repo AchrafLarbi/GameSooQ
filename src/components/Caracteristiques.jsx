@@ -9,7 +9,7 @@ const Caracteristiques = () => {
       <div className="pl-6 md:pr-96">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-5xl text-white font-bold font-josefin max-w-3xl mb-6">
-            À PROPOS GAMESOOQ
+            À PROPOS DE GAMESOOQ
           </h2>
           <p className="opacity-50 text-white text-base md:text-lg leading-relaxed">
             GameSooq est une marketplace multiplateforme disponible sur iOS et

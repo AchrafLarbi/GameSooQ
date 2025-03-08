@@ -74,7 +74,7 @@ export default function Form() {
             Contactez-Nous
           </p>
           <h1 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold mt-2">
-            VOUS AVEZ UNE QUESTION OU UN FEEDBACK ?
+            VOUS AVEZ UNE QUESTION OU UN RETOUR ?
           </h1>
           <p className="text-gray-300 text-sm md:text-base mt-2">
             Vous avez une question ou besoin d’assistance ? Remplissez le
@@ -89,7 +89,7 @@ export default function Form() {
             className="flex items-center text-white hover:text-[#ff5e3a] transition-colors"
           >
             <span className="text-[#ff5e3a] mr-2">✉</span>
-            Contact@Gamesoq.com
+            Contact@Gamesooq.com
           </a>
           <a
             href="tel:+313023225576"
