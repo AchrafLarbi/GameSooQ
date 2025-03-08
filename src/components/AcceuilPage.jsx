@@ -1,4 +1,4 @@
-import acceuil_bg from "../assets/background/acceuil_bg.png";
+import acceuil_bg from "../assets/background/bg.png";
 import AcceuilPageMiddle from "./AcceuilPageMiddle";
 
 const AcceuilPage = () => {
@@ -7,14 +7,17 @@ const AcceuilPage = () => {
       id="acceuil"
       className="relative min-h-screen w-full flex flex-col items-center justify-center text-white text-center px-4"
       style={{
-        backgroundImage: `url(${acceuil_bg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundImage: `
+
+        url(${acceuil_bg})
+      `,
+        backgroundSize: "contain",
+        backgroundPosition: "right top",
         backgroundRepeat: "no-repeat",
       }}
     >
       {/* Dark overlay for better readability */}
-      <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+      <div className="absolute inset-0  bg-opacity-60"></div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full px-4  sm:mt-20 lg:mt-28 mb-32">

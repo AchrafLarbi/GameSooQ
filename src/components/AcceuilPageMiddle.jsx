@@ -2,7 +2,7 @@
 
 import { motion as Motion } from "framer-motion";
 
-import bg_acceuil from "../assets/mockup/mockup2.png";
+import bg_acceuil from "../assets/mockup/mockup1.png";
 import WaveSvg from "./layout/WaveSvg";
 import WaveSvgRight from "./layout/WaveSvgRight";
 

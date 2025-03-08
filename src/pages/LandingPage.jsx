@@ -1,7 +1,7 @@
 import Header from "../components/layout/Header";
 import AcceuilPage from "../components/AcceuilPage";
 import Caracteristiques from "../components/Caracteristiques";
-// import Services from "../components/Services";
+import Fonctionnalites from "../components/Fonctionnalites";
 // import Galerie from "../components/Galerie";
 // import FeedbackForm from "../components/FeedbackForm";
 // import LocalisationSection from "../components/Localisation";
@@ -13,12 +13,12 @@ import Caracteristiques from "../components/Caracteristiques";
 const LandingPage = () => {
   return (
     <div
-      className="relative w-full h-full bg-black"
+      className="relative w-full h-full"
       style={{
-        backgroundColor: "#1C1B29",
-        backgroundSize: "15%",
+        backgroundImage: "linear-gradient(to bottom right, #1E1B2C, #2A1F3D)", // Apply the gradient properly
+        backgroundSize: "100%", // Ensure it covers the full area
         backgroundPosition: "center",
-        backgroundAttachment: "fixed", // Ensures background stays fixed while scrolling
+        backgroundAttachment: "fixed", // Keeps background fixed while scrolling
       }}
     >
       {/* Header Component */}
@@ -28,7 +28,7 @@ const LandingPage = () => {
       <main>
         <AcceuilPage />
         <Caracteristiques />
-        {/* <Galerie />
+        <Fonctionnalites />
         {/* <Contact /> */}
         {/* <LocalisationSection />  */}
         {/* <FeedbackForm />  */}

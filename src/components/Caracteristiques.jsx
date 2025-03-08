@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 
 const Caracteristiques = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1E1B2C] to-[#2A1F3D] flex flex-col gap-32 py-20">
+    <div className="min-h-screen flex flex-col gap-32 py-20">
       {/* About Section */}
-      <div className="px-6 md:px-20">
-        <div className="max-w-5xl">
+      <div className="pl-6 md:pr-96">
+        <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-5xl text-white font-bold font-josefin max-w-3xl mb-6">
             À PROPOS GAMESOOQ
           </h2>
