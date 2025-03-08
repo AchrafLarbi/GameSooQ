@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
+import Aide from "./pages/Aide";
 // import Dashboard from "./pages/Dashboard";
 // import ProtectedRoute from "./components/layout/ProtectedRoute";
 // import LoginForm from "./components/layout/LoginForm";
@@ -11,16 +12,7 @@ const App = () => {
       <div className="App">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          {/* <Route
-            path="/houarioran31"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/login" element={<LoginForm />} />
-          {/* <Route path="/register" element={<RegisterForm />} /> */}
+          <Route path="/faq/:id" element={<Aide />} />
         </Routes>
       </div>
     </Router>

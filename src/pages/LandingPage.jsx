@@ -1,5 +1,9 @@
 import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 import AcceuilPage from "../components/AcceuilPage";
+import Download from "../components/Download";
+import FAQsection from "../components/FAQSection";
+
 import AcceuilPageMiddle from "../components/AcceuilPageMiddle";
 // import Services from "../components/Services";
 // import Galerie from "../components/Galerie";
@@ -34,9 +38,10 @@ const LandingPage = () => {
         {/* <LocalisationSection />  */}
         {/* <FeedbackForm />  */}
       </main>
-
+      <FAQsection />
+      <Download />
       {/* Footer Component */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
