@@ -7,11 +7,13 @@ const AcceuilPage = () => {
       id="acceuil"
       className="relative min-h-screen w-full flex flex-col items-center justify-center text-white text-center px-4"
       style={{
-        backgroundImage: `url(${acceuil_bg})`,
-        backgroundSize: "cover", // Ensures full coverage of the container
-        backgroundPosition: "right top", // Keeps image aligned to the right
+        backgroundImage: `
+
+        url(${acceuil_bg})
+      `,
+        backgroundSize: "contain",
+        backgroundPosition: "right top",
         backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed", // Optional: Keeps the image fixed on scroll
       }}
     >
       {/* Dark overlay for better readability */}
