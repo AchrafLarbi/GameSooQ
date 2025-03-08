@@ -46,7 +46,7 @@ export default function Form() {
       .then(
         (response) => {
           console.log("SUCCESS!", response.status, response.text);
-          alert("Message envoyé avec succès !");
+          alert("Message envoyé avec succès!");
           setFormData({
             nom: "",
             prenom: "",
