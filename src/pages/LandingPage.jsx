@@ -5,6 +5,7 @@ import Download from "../components/Download";
 import FAQsection from "../components/FAQSection";
 import Fonctionnalites from "../components/Fonctionnalites";
 import Caracteristiques from "../components/Caracteristiques";
+import FAQ from "../components/FAQ";
 // import Services from "../components/Services";
 // import Galerie from "../components/Galerie";
 // import FeedbackForm from "../components/FeedbackForm";
@@ -37,6 +38,7 @@ const LandingPage = () => {
         {/* <LocalisationSection />  */}
         {/* <FeedbackForm />  */}
       </main>
+      <FAQ />
       <FAQsection />
       <Download />
       {/* Footer Component */}

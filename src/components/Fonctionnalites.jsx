@@ -15,42 +15,42 @@ const FeaturesSection = () => {
     {
       title: "Achat et Échange de Jeux",
       description:
-        "Achetez les derniers jeux à prix réduit, revendez ceux que vous n'utilisez plus ou échangez-les avec d'autres joueurs pour toujours avoir de nouvelles expériences sans dépenser une fortune.",
+        "Achetez les derniers jeux à prix réduit, revendez ceux que vous n’utilisez plus ou échangez-les avec d’autres joueurs pour toujours avoir de nouvelles expériences sans dépenser une fortune.",
       icon: "shopping-cart",
       img: foncImg1,
     },
     {
-      title: "Communauté de Joueurs",
+      title: "Achat et Échange de Consoles",
       description:
-        "Rejoignez une communauté active de passionnés de jeux vidéo, partagez vos expériences et découvrez de nouveaux titres recommandés par d'autres joueurs.",
+        "Trouvez des consoles d’occasion en bon état ou vendez la vôtre facilement. Échangez avec d’autres gamers pour tester différentes plateformes sans contrainte.",
       icon: "users",
       img: foncImg2,
     },
     {
-      title: "Notifications Personnalisées",
+      title: "Système de Chat entre Utilisateurs",
       description:
-        "Recevez des alertes pour les jeux qui vous intéressent, les baisses de prix et les offres spéciales correspondant à vos préférences de jeu.",
+        "Contactez instantanément les vendeurs et acheteurs via un chat intégré. Posez des questions, négociez les prix et finalisez vos transactions en toute fluidité.",
       icon: "bell",
       img: foncImg3,
     },
     {
-      title: "Système de Paiement Sécurisé",
+      title: "Notifications en Temps Réel",
       description:
-        "Effectuez vos transactions en toute sécurité grâce à notre système de paiement protégé et nos garanties d'achat pour une expérience sans souci.",
+        "Recevez des alertes instantanées pour les nouveaux jeux et consoles disponibles, les messages des autres utilisateurs ou les mises à jour importantes de la plateforme.",
       icon: "shield",
       img: foncImg4,
     },
     {
-      title: "Évaluations et Avis",
+      title: "Suivi des Transactions",
       description:
-        "Consultez les avis d'autres utilisateurs avant d'acheter un jeu et partagez votre propre expérience pour aider la communauté à faire les meilleurs choix.",
+        "Suivez en temps réel l’état de vos transactions, de la mise en vente à la finalisation de l’échange. Recevez des mises à jour instantanées pour chaque étape afin d’assurer une expérience sécurisée et transparente.",
       icon: "star",
       img: foncImg5,
     },
     {
-      title: "Support Multi-Plateformes",
+      title: "Évaluation des Utilisateurs",
       description:
-        "Trouvez des jeux pour toutes les plateformes: PlayStation, Xbox, Nintendo Switch, PC et mobile, tout au même endroit pour simplifier vos recherches.",
+        "Consultez les avis et notes laissés par la communauté pour chaque utilisateur. Laissez un feedback après chaque transaction pour garantir une plateforme sécurisée et fiable où seuls les meilleurs vendeurs et acheteurs se démarquent.",
       icon: "devices",
       img: foncImg6,
     },

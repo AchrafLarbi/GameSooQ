@@ -13,7 +13,7 @@ const MenuBar = ({ isMobile = false }) => {
       { label: "Fonctionnalités", sectionId: "fonctionnalites", path: "/" },
       { label: "Contactez-nous", sectionId: "contactez-nous", path: "/" },
       { label: "FAQ", sectionId: "faq", path: "/" },
-      { label: "Télécharger", sectionId: "télécharger", path: "/" },
+      { label: "Aide", sectionId: "aide", path: "/" },
     ],
     []
   );
