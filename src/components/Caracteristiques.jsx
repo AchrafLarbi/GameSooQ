@@ -140,9 +140,9 @@ const Caracteristiques = () => {
           {/* Right content - Mobile App Image */}
           <div className="relative lg:h-full flex flex-col items-center justify-center">
             {/* Decorative curved lines */}
-            <div className="absolute  ">
-              <CaraSvg />
-            </div>
+
+            <CaraSvg />
+
             <div className="relative lg:h-full flex flex-col items-center justify-center">
               {/* Mobile image with animation */}
               <motion.div
@@ -180,7 +180,7 @@ const Caracteristiques = () => {
                   <motion.img
                     src={mobileApp || "/placeholder.svg"}
                     alt="GameSooq Mobile App Interface"
-                    className="w-full max-w-md mx-auto"
+                    className="w-10/12 max-w-md mx-auto"
                     initial={{ scale: 0.95, rotate: -2 }}
                     animate={{
                       scale: 1,
