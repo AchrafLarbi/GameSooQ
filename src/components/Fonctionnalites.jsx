@@ -13,7 +13,7 @@ import { motion as Motion } from "framer-motion";
 const FeaturesSection = () => {
   const features = [
     {
-      title: "Achat et Échange de Jeux",
+      title: "Achat, vente et échange de jeux",
       description:
         "Achetez les derniers jeux à prix réduit, revendez ceux que vous n’utilisez plus ou échangez-les avec d’autres joueurs pour toujours avoir de nouvelles expériences sans dépenser une fortune.",
       icon: "shopping-cart",

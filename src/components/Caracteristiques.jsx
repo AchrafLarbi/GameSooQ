@@ -65,7 +65,7 @@ const Caracteristiques = () => {
                   </svg>
 
                   <h3 className="text-white text-xl font-semibold">
-                    Interfaces convivial
+                    Interface conviviale
                   </h3>
                 </div>
                 <p className="text-white opacity-50 text-lg leading-relaxed ">
