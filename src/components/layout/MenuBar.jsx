@@ -11,7 +11,7 @@ const MenuBar = ({ isMobile = false }) => {
       { label: "Accueil", sectionId: "acceuil", path: "/" },
       { label: "Caractéristiques", sectionId: "caracteristiques", path: "/" },
       { label: "Fonctionnalités", sectionId: "fonctionnalites", path: "/" },
-      { label: "Contactez-nous", sectionId: "contactez-nous", path: "/" },
+      { label: "Contactez-nous", sectionId: "contact", path: "/" },
       { label: "FAQ", sectionId: "faq", path: "/" },
       { label: "Aide", sectionId: "aide", path: "/" },
     ],

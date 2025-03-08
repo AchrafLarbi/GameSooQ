@@ -64,7 +64,10 @@ export default function Form() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 max-w-7xl mx-auto">
+    <section
+      id="contact"
+      className="min-h-screen flex flex-col items-center justify-center px-4 max-w-7xl mx-auto"
+    >
       <div className="w-full max-w-7xl mx-auto">
         <div className="text-center mb-8 md:mb-12">
           <p className="text-[#ff5e3a] text-sm md:text-base font-medium uppercase tracking-wider">
@@ -185,6 +188,6 @@ export default function Form() {
           </div>
         </form>
       </div>
-    </div>
+    </section>
   );
 }
