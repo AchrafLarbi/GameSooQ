@@ -46,7 +46,7 @@ export default function AcceuilPageMiddle() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          sooQ
+          Sooq
         </Motion.h1>
       </div>
 
@@ -80,7 +80,7 @@ export default function AcceuilPageMiddle() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          sooQ
+          Sooq
         </Motion.h1>
       </div>
 

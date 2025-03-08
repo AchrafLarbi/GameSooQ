@@ -50,7 +50,6 @@ function Footer() {
   🔹 Merci de faire de GameSooq une communauté sûre, honnête et passionnée ! 🎮🔥
   `;
 
-
   const catalogueRules = `📜 RÈGLES DU CATALOGUE GAMESOOQ
   
   GameSooq est une marketplace dédiée aux passionnés de jeux vidéo. Pour garantir une expérience fluide et sécurisée, chaque utilisateur doit respecter les règles suivantes lors de la publication d’une annonce.
@@ -136,9 +135,10 @@ function Footer() {
               />
             </div>
             <p className="text-gray-300 mb-6 text-sm text-left">
-              GameSooq est une marketplace dédiée aux gamers en Algérie pour acheter, vendre et échanger des jeux vidéo
-              et des consoles en toute simplicité et sécurité. Connectez-vous avec d'autres joueurs et trouvez les
-              meilleures offres près de chez vous !
+              GameSooq est une marketplace dédiée aux gamers en Algérie pour
+              acheter, vendre et échanger des jeux vidéo et des consoles en
+              toute simplicité et sécurité. Connectez-vous avec d'autres joueurs
+              et trouvez les meilleures offres près de chez vous !
             </p>
             <div className="flex justify-left space-x-4 mb-6">
               <a href="#" className="hover:text-gray-400 transition-colors">
@@ -157,7 +157,9 @@ function Footer() {
           </div>
 
           <div className="lg:col-span-1 flex flex-col items-center">
-            <h3 className="text-[#FF6B35] font-bold mb-4 text-lg">Caractéristiques</h3>
+            <h3 className="text-[#FF6B35] font-bold mb-4 text-lg">
+              Caractéristiques
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>Interface conviviale</li>
               <li>Rapidité et Performance</li>
@@ -166,9 +168,11 @@ function Footer() {
           </div>
 
           <div className="lg:col-span-1 flex flex-col items-center">
-            <h3 className="text-[#FF6B35] font-bold mb-4 text-lg">Fonctionnalités</h3>
+            <h3 className="text-[#FF6B35] font-bold mb-4 text-lg">
+              Fonctionnalités
+            </h3>
             <ul className="space-y-2 text-sm">
-              <li>Jeux et consoles</li>
+              <li>Achat, vente et échanges de jeux vidéos et de consoles</li>
               <li>Notifications</li>
               <li>Discussion et évaluation</li>
               <li>Suivi de transactions</li>
@@ -186,12 +190,18 @@ function Footer() {
         </div>
 
         <div className="border-t border-gray-700 mt-6 pt-4 flex justify-between text-gray-400 text-sm">
-          <p>© 2025 Gamesooq - Tous Droits Réservés</p>
+          <p>© 2025 Gamesooq - Tous droits réservés</p>
           <div className="flex space-x-4">
-            <button onClick={() => handleOpenModal(catalogueRules)} className="text-gray-300 hover:text-white underline">
+            <button
+              onClick={() => handleOpenModal(catalogueRules)}
+              className="text-gray-300 hover:text-white underline"
+            >
               Règles du catalogue
             </button>
-            <button onClick={() => handleOpenModal(communityRules)} className="text-gray-300 hover:text-white underline">
+            <button
+              onClick={() => handleOpenModal(communityRules)}
+              className="text-gray-300 hover:text-white underline"
+            >
               Règles de la communauté
             </button>
           </div>
@@ -199,11 +209,20 @@ function Footer() {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center p-4" onClick={handleCloseModal}>
-          <div className="bg-[#1E1E2E] p-6 rounded-lg max-w-2xl w-full text-left text-gray-300 overflow-auto max-h-[80vh]" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center p-4"
+          onClick={handleCloseModal}
+        >
+          <div
+            className="bg-[#1E1E2E] p-6 rounded-lg max-w-2xl w-full text-left text-gray-300 overflow-auto max-h-[80vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
             <h2 className="text-2xl font-bold mb-4">Règles</h2>
             <p className="whitespace-pre-line">{modalContent}</p>
-            <button className="mt-4 text-red-500 hover:underline" onClick={handleCloseModal}>
+            <button
+              className="mt-4 text-red-500 hover:underline"
+              onClick={handleCloseModal}
+            >
               Fermer
             </button>
           </div>

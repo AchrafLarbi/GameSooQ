@@ -6,7 +6,10 @@ import AppStore from "../assets/AppStore.svg";
 
 export default function Download() {
   return (
-    <div className="relative w-full max-w-7xl mx-auto py-10 px-6 flex items-center justify-center">
+    <section
+      id="telecharge"
+      className="relative w-full max-w-7xl mx-auto py-10 px-6 flex items-center justify-center"
+    >
       <div className="relative w-full flex justify-center">
         <img
           src={Frame}
@@ -29,7 +32,11 @@ export default function Download() {
               rel="noopener noreferrer"
               className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
             >
-              <img src={PlayStore} className="w-36 sm:w-44 md:w-48 h-auto" alt="Get it on Google Play" />
+              <img
+                src={PlayStore}
+                className="w-36 sm:w-44 md:w-48 h-auto"
+                alt="Get it on Google Play"
+              />
             </a>
 
             <a
@@ -38,11 +45,15 @@ export default function Download() {
               rel="noopener noreferrer"
               className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
             >
-              <img src={AppStore} className="w-36 sm:w-44 md:w-48 h-auto" alt="Download on the App Store" />
+              <img
+                src={AppStore}
+                className="w-36 sm:w-44 md:w-48 h-auto"
+                alt="Download on the App Store"
+              />
             </a>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
