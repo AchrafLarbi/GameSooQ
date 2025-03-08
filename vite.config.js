@@ -7,5 +7,5 @@ export default defineConfig({
   build: {
     outDir: "dist/client", // Ensure this is set correctly
   },
-  base: "http://www.gamesooq.com/",
+  base: "./",
 });
