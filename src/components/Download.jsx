@@ -18,7 +18,7 @@ export default function Download() {
         />
 
         <div className="absolute w-full h-full flex flex-col items-center sm:items-start justify-center text-white text-center sm:text-left px-4 sm:px-10 sm:ml-40">
-          <h2 className="text-xl sm:text-3xl md:text-5xl font-extrabold sm:mb-3 ">
+          <h2 className="text-sm sm:text-3xl md:text-5xl font-extrabold sm:mb-3 ">
             Prêt à commencer ?
           </h2>
           <p className="text-sm sm:text-lg opacity-80 font-medium mb-5">
@@ -30,7 +30,7 @@ export default function Download() {
               href="https://play.google.com/store"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-20 sm:w-auto"
             >
               <img
                 src={PlayStore}
@@ -43,7 +43,7 @@ export default function Download() {
               href="https://apps.apple.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-20 sm:w-auto"
             >
               <img
                 src={AppStore}

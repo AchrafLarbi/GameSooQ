@@ -11,7 +11,7 @@ const MenuBar = ({ isMobile = false }) => {
       { label: "Accueil", sectionId: "acceuil", path: "/" },
       { label: "Caractéristiques", sectionId: "caracteristiques", path: "/" },
       { label: "Fonctionnalités", sectionId: "fonctionnalites", path: "/" },
-      { label: "Contactez-Nous", sectionId: "contact", path: "/" },
+      { label: "Contact", sectionId: "contact", path: "/" },
       { label: "FAQ", sectionId: "faq", path: "/" },
       { label: "Aide", sectionId: "aide", path: "/" },
     ],
@@ -81,7 +81,7 @@ const MenuBar = ({ isMobile = false }) => {
         className={`${
           isMobile
             ? "flex flex-col items-center space-y-6 py-8 px-6 text-white "
-            : "flex items-center space-x-16 text-white text-lg md:text-xl"
+            : "flex items-center space-x-16 text-white text-lg md:text-xl mr-20"
         }`}
         style={
           isMobile

@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full z-50">
+    <header className="fixed top-0 w-full z-50 ">
       {/* Blur Background */}
       <div className="absolute inset-0 backdrop-blur shadow-md z-[-1]"></div>
 
@@ -39,8 +39,8 @@ const Header = () => {
             <img
               src={header_icon || "/placeholder.svg"}
               alt="Logo"
-              className={`transition-all duration-300 ${
-                isMobile ? "w-40" : "w-60" // Reduce logo size on mobile
+              className={`transition-all duration-300 ml-20 ${
+                isMobile ? "w-20" : "w-40" // Reduce logo size on mobile
               }`}
             />
           </div>

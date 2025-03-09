@@ -98,7 +98,7 @@ const FeaturesSection = () => {
                       visible: {
                         opacity: 1,
                         transition: {
-                          delayChildren: 0.5, // Delay other elements so this animation happens first
+                          delayChildren: 0.5, 
                         },
                       },
                     }}
@@ -248,11 +248,11 @@ const FeaturesSection = () => {
                       </svg>
                     )}
                   </div>
-                  <h3 className="text-white  text-3xl sm:text-4xl font-bold">
+                  <h3 className="text-white text-xl font-semibold">
                     {feature.title}
                   </h3>
                 </div>
-                <p className="opacity-50 text-white  text-2xl leading-relaxed">
+                <p className="text-white opacity-50 text-lg leading-relaxed">
                   {feature.description}
                 </p>
               </div>
