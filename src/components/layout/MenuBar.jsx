@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const MenuBar = ({ isMobile = false }) => {
+const MenuBar = ({ isMobile = false, closeMenu }) => {
   const [activeIndex, setActiveIndex] = useState(-1); // Start with no active item
   const navigate = useNavigate();
   const location = useLocation();
@@ -38,6 +38,10 @@ const MenuBar = ({ isMobile = false }) => {
         setActiveIndex(index); // Only set active index after navigating to home
       }
     }, 100);
+
+    if (isMobile && closeMenu) {
+      closeMenu();
+    }
   };
 
   useEffect(() => {

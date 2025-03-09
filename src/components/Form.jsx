@@ -89,7 +89,7 @@ export default function Form() {
             className="flex items-center text-white hover:text-[#ff5e3a] transition-colors"
           >
             <span className="text-[#ff5e3a] mr-2">✉</span>
-            Contact@Gamesooq.com
+            contact@Gamesooq.com
           </a>
           <a
             href="tel:+313023225576"

@@ -20,7 +20,7 @@ const FeaturesSection = () => {
       img: foncImg1,
     },
     {
-      title: "Achat et Échange de Consoles",
+      title: "Achat, vente et échange de consoles",
       description:
         "Trouvez des consoles d’occasion en bon état ou vendez la vôtre facilement. Échangez avec d’autres gamers pour tester différentes plateformes sans contrainte.",
       icon: "users",
@@ -84,8 +84,8 @@ const FeaturesSection = () => {
               {/* Modified this div to position more to the left on large screens */}
               <div className="relative lg:h-full flex flex-col items-center justify-center mx-auto">
                 {/* Phone image with curved lines */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <FoncSvg />
+                <div className="absolute inset-0 flex items-center justify-center ">
+                  <FoncSvg className="w-full h-full" />
                 </div>
 
                 <div className="relative flex flex-col items-center justify-center">
@@ -125,7 +125,7 @@ const FeaturesSection = () => {
                       <Motion.img
                         src={feature.img || "/placeholder.svg"}
                         alt="GameSooq Mobile App Interface"
-                        className="w-7/12 max-w-md mx-auto"
+                        className="w-6/12 max-w-md mx-auto"
                         initial={{ scale: 0.95, rotate: -2 }}
                         animate={{
                           scale: 1,
