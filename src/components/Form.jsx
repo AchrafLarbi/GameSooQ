@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import emailjs from "emailjs-com";
 
 export default function Form() {
@@ -13,6 +13,7 @@ export default function Form() {
     message: "",
   });
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const validateForm = () => {
     let newErrors = {};
@@ -41,8 +42,14 @@ export default function Form() {
     e.preventDefault();
     if (!validateForm()) return;
 
+    setLoading(true);
     emailjs
-      .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", formData, "YOUR_PUBLIC_KEY")
+      .send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formData,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      )
       .then(
         (response) => {
           console.log("SUCCESS!", response.status, response.text);
@@ -55,10 +62,12 @@ export default function Form() {
             message: "",
           });
           setErrors({});
+          setLoading(false);
         },
         (err) => {
           console.log("FAILED...", err);
           alert("Une erreur s'est produite. Veuillez réessayer.");
+          setLoading(false);
         }
       );
   };
@@ -82,22 +91,6 @@ export default function Form() {
             brefs délais. <br />
             Nous sommes là pour vous aider à chaque étape !
           </p>
-        </div>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-8">
-          <a
-            href="mailto:Contact@Gamesoq.Com"
-            className="flex items-center text-white hover:text-[#ff5e3a] transition-colors"
-          >
-            <span className="text-[#ff5e3a] mr-2">✉</span>
-            contact@Gamesooq.com
-          </a>
-          <a
-            href="tel:+313023225576"
-            className="flex items-center text-white hover:text-[#ff5e3a] transition-colors"
-          >
-            <span className="text-[#ff5e3a] mr-2">📞</span>
-            +213 (0) 23 22 55 76
-          </a>
         </div>
         <form onSubmit={handleSubmit} className="w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -181,9 +174,14 @@ export default function Form() {
             <button
               type="submit"
               className="bg-[#ff5e3a] hover:bg-[#e04d2e] text-white font-medium px-6 py-3 rounded-full flex items-center transition-colors"
+              disabled={loading}
             >
+              {loading ? (
+                <Loader2 className="animate-spin mr-2" />
+              ) : (
+                <Send className="mr-2" />
+              )}{" "}
               Envoyer
-              <Send className="ml-2 h-4 w-4" />
             </button>
           </div>
         </form>
