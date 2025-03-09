@@ -17,20 +17,20 @@ export default function Download() {
           alt="Prêt à commencer?"
         />
 
-        <div className="absolute w-full h-full flex flex-col items-center sm:items-start justify-center text-white text-center sm:text-left px-4 sm:px-10 sm:ml-40">
-          <h2 className="text-xl sm:text-3xl md:text-5xl font-extrabold sm:mb-3 ">
+        <div className="absolute w-full h-full flex flex-col items-center  justify-center text-white text-center sm:text-left sm:px-10 ">
+          <h2 className="text-sm sm:text-3xl md:text-5xl font-extrabold sm:mb-3 ">
             Prêt à commencer ?
           </h2>
           <p className="text-sm sm:text-lg opacity-80 font-medium mb-5">
             Téléchargez l’application dès maintenant...
           </p>
 
-          <div className="flex flex-col md:flex-row sm:flex-col gap-4 sm:mt-6 justify-center sm:justify-start sm:ml-40 ">
+          <div className="flex flex-col md:flex-row sm:flex-col gap-4  justify-center sm:justify-start ">
             <a
               href="https://play.google.com/store"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-20 sm:w-auto"
             >
               <img
                 src={PlayStore}
@@ -43,7 +43,7 @@ export default function Download() {
               href="https://apps.apple.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-20 sm:w-auto"
             >
               <img
                 src={AppStore}

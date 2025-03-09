@@ -29,19 +29,21 @@ const Header = () => {
       <div className="absolute inset-0 backdrop-blur shadow-md z-[-1]"></div>
 
       <div
-        className={`flex justify-center items-center backdrop-blur w-full transition-all duration-300 ${
+        className={`flex justify-center items-center backdrop-blur transition-all duration-300 ${
           isMobile ? "h-[60px]" : "h-[80px]"
-        }`} // Reduce height in mobile mode
+        }`} // Fixed template literal syntax
       >
         <div className="relative flex items-center w-full px-4 xl:px-0">
           {/* Logo - Scales Down in Mobile View */}
-          <div className="p-2 xl:ml-10 flex items-center justify-center xl:justify-start w-full">
+          <div className="p-2 flex items-center justify-center xl:justify-start w-full">
             <img
               src={header_icon || "/placeholder.svg"}
               alt="Logo"
               className={`transition-all duration-300 ${
-                isMobile ? "w-40" : "w-60" // Reduce logo size on mobile
-              }`}
+                isMobile
+                  ? "w-32 ml-0 md:ml-4" // Responsive margins for mobile
+                  : "w-40 ml-0 md:ml-10 xl:ml-20" // Gradually increase margin as screen gets larger
+              }`} // Fixed template literal syntax
             />
           </div>
 

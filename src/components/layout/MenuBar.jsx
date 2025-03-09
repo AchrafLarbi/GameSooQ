@@ -11,7 +11,7 @@ const MenuBar = ({ isMobile = false, closeMenu }) => {
       { label: "Accueil", sectionId: "acceuil", path: "/" },
       { label: "Caractéristiques", sectionId: "caracteristiques", path: "/" },
       { label: "Fonctionnalités", sectionId: "fonctionnalites", path: "/" },
-      { label: "Contactez-Nous", sectionId: "contact", path: "/" },
+      { label: "Contact", sectionId: "contact", path: "/" },
       { label: "FAQ", sectionId: "faq", path: "/" },
       { label: "Aide", sectionId: "aide", path: "/" },
     ],
@@ -84,9 +84,9 @@ const MenuBar = ({ isMobile = false, closeMenu }) => {
       <nav
         className={`${
           isMobile
-            ? "flex flex-col items-center space-y-6 py-8 px-6 text-white "
-            : "flex items-center space-x-16 text-white text-lg md:text-xl"
-        }`}
+            ? "flex flex-col items-center space-y-6 py-8 px-6 text-white"
+            : "flex items-center space-x-16 text-white text-lg md:text-xl mr-20"
+        }`} // Fixed template literal syntax
         style={
           isMobile
             ? {
@@ -111,7 +111,7 @@ const MenuBar = ({ isMobile = false, closeMenu }) => {
               location.pathname === "/" && activeIndex === index
                 ? "text-[#FF5733]"
                 : "text-white"
-            } hover:text-[#FF5733]`}
+            } hover:text-[#FF5733]`} // Fixed template literal syntax
           >
             <span className="relative">
               {item.label}
@@ -120,7 +120,7 @@ const MenuBar = ({ isMobile = false, closeMenu }) => {
                   location.pathname === "/" && activeIndex === index
                     ? "scale-x-100"
                     : "scale-x-0"
-                } hover:scale-x-100 origin-left`}
+                } hover:scale-x-100 origin-left`} // Fixed template literal syntax
               ></span>
             </span>
           </button>

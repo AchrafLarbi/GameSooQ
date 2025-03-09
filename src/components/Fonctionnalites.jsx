@@ -84,8 +84,12 @@ const FeaturesSection = () => {
               {/* Modified this div to position more to the left on large screens */}
               <div className="relative lg:h-full flex flex-col items-center justify-center mx-auto">
                 {/* Phone image with curved lines */}
-                <div className="absolute inset-0 flex items-center justify-center ">
-                  <FoncSvg className="w-full h-full" />
+                <div className="absolute inset-0 flex items-center justify-center  ">
+                  <FoncSvg
+                    className={`w-full h-full  ${
+                      index % 2 === 0 ? "left-0" : "right-0"
+                    }`}
+                  />
                 </div>
 
                 <div className="relative flex flex-col items-center justify-center">
@@ -98,7 +102,7 @@ const FeaturesSection = () => {
                       visible: {
                         opacity: 1,
                         transition: {
-                          delayChildren: 0.5, // Delay other elements so this animation happens first
+                          delayChildren: 0.5,
                         },
                       },
                     }}
@@ -125,7 +129,7 @@ const FeaturesSection = () => {
                       <Motion.img
                         src={feature.img || "/placeholder.svg"}
                         alt="GameSooq Mobile App Interface"
-                        className="w-6/12 max-w-md mx-auto"
+                        className="w-4/12 xl:w-6/12 max-w-md mx-auto "
                         initial={{ scale: 0.95, rotate: -2 }}
                         animate={{
                           scale: 1,
@@ -248,11 +252,11 @@ const FeaturesSection = () => {
                       </svg>
                     )}
                   </div>
-                  <h3 className="text-white  text-3xl sm:text-4xl font-bold">
+                  <h3 className="text-white text-xl font-semibold">
                     {feature.title}
                   </h3>
                 </div>
-                <p className="opacity-50 text-white  text-2xl leading-relaxed">
+                <p className="text-white opacity-50 text-lg leading-relaxed">
                   {feature.description}
                 </p>
               </div>

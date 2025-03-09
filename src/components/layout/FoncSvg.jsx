@@ -4,7 +4,7 @@ const FoncSvg = () => {
       viewBox="0 0 737 726"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="path-animate w-[130%] h-[150%]  absolute "
+      className="path-animate absolute w-full h-full xl:w-[140%] xl:h-[120%]  "
     >
       <path
         d="M119 23L120.505 52.9289L149.434 45.1115L121.435 55.7911L137.809 80.8885L119 57.56L100.191 80.8885L116.565 55.7911L88.5662 45.1115L117.495 52.9289L119 23Z"

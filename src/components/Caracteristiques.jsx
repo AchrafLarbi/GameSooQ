@@ -6,7 +6,7 @@ const Caracteristiques = () => {
   return (
     <div className="min-h-screen flex flex-col gap-32 py-20">
       {/* About Section */}
-      <div className="pl-6 md:pr-96">
+      <div className="px-20 md:pr-96">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-5xl text-white font-bold font-josefin max-w-3xl mb-6">
             À PROPOS DE GAMESOOQ
@@ -37,7 +37,7 @@ const Caracteristiques = () => {
               <h3 className="text-[#FF5733] uppercase text-lg tracking-wider">
                 Les caractéristiques
               </h3>
-              <h2 className="text-white text-xl md:text-5xl font-bold whitespace-nowrap ">
+              <h2 className="text-white text-xl md:text-3xl lg:text-5xl font-extrabold whitespace-nowrap ">
                 DE NOTRE APPLICATION MOBILE
               </h2>
             </div>
@@ -180,7 +180,7 @@ const Caracteristiques = () => {
                   <Motion.img
                     src={mobileApp || "/placeholder.svg"}
                     alt="GameSooq Mobile App Interface"
-                    className="w-10/12 max-w-md mx-auto"
+                    className="w-8/12 xl:w-10/12 max-w-md mx-auto"
                     initial={{ scale: 0.95, rotate: -2 }}
                     animate={{
                       scale: 1,
