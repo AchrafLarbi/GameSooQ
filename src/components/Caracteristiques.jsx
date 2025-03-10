@@ -6,8 +6,8 @@ const Caracteristiques = () => {
   return (
     <div className="min-h-screen flex flex-col gap-32 py-20">
       {/* About Section */}
-      <div className="px-20 md:pr-96">
-        <div className="max-w-5xl mx-auto">
+      <div className="px-6 md:px-20 ">
+        <div className="max-w-5xl md:px-20">
           <h2 className="text-3xl md:text-5xl text-white font-bold font-josefin max-w-3xl mb-6">
             À PROPOS DE GAMESOOQ
           </h2>

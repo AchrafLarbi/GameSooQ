@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import LandingPage from "./pages/LandingPage";
 import Aide from "./pages/Aide";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 // import Dashboard from "./pages/Dashboard";
 // import ProtectedRoute from "./components/layout/ProtectedRoute";
 // import LoginForm from "./components/layout/LoginForm";
@@ -13,6 +14,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/faq/:id" element={<Aide />} />
+          <Route
+            path="/politique-confidentialite"
+            element={<PolitiqueConfidentialite />}
+          />
         </Routes>
       </div>
     </Router>
