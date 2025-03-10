@@ -213,7 +213,7 @@ function Footer() {
               Règles de la communauté
             </button>
             <button
-              onClick={() => handleOpenPolitique}
+              onClick={() => handleOpenPolitique()}
               className="text-gray-300 hover:text-white underline px-2"
             >
               Politique de confidentialité
