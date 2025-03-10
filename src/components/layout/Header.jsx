@@ -25,13 +25,12 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 w-full z-50">
-      {/* Blur Background */}
       <div className="absolute inset-0 backdrop-blur shadow-md z-[-1]"></div>
 
       <div
         className={`flex justify-center items-center backdrop-blur transition-all duration-300 ${
           isMobile ? "h-[60px]" : "h-[80px]"
-        }`} // Fixed template literal syntax
+        }`} 
       >
         <div className="relative flex items-center w-full px-4 xl:px-0">
           {/* Logo - Scales Down in Mobile View */}
@@ -47,7 +46,6 @@ const Header = () => {
             />
           </div>
 
-          {/* Hamburger Menu (Hidden on 1280px+) */}
           <button
             className="xl:hidden text-white p-2 absolute left-4"
             onClick={toggleMenu}
