@@ -1,16 +1,17 @@
-import acceuil_bg from "../assets/background/acceuil_bg.png";
+import acceuil_bg from "../assets/background/Gaming2.jpg";
 import AcceuilPageMiddle from "./AcceuilPageMiddle";
 
 const AcceuilPage = () => {
   return (
     <section
       id="acceuil"
-      className="relative min-h-screen w-full flex flex-col items-center justify-center text-white text-center px-4 bg-wrapper"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center text-white text-center px-4 "
       style={{
         backgroundImage: `url(${acceuil_bg})`,
         backgroundSize: "cover", // Ensures full coverage of the container
-        backgroundPosition: "right top", // Keeps image aligned to the right
+        backgroundPosition: " right center ",
         backgroundRepeat: "no-repeat",
+        backgroundAttachment: "scroll",
       }}
     >
       {/* Dark overlay for better readability */}

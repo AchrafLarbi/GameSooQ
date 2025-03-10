@@ -47,7 +47,7 @@ body {
 }
 // In your CSS file
 .bg-wrapper {
-  background-attachment: fixed;
+  background-attachment: fixed !important;
 }
 
 @supports (-webkit-touch-callout: none) {
