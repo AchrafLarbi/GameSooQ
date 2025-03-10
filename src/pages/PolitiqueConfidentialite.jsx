@@ -1,4 +1,6 @@
 import { ArrowLeft } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const Section = ({ title, children }) => (
   <section className="mb-8">
@@ -12,18 +14,26 @@ const ListItem = ({ children }) => (
 );
 
 const PolitiqueConfidentialite = () => {
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Force re-render when the route changes
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-[#1E1B2C]">
       <div className="container mx-auto px-4 py-12 max-w-4xl ">
-        <a
-          href="/"
+        <button
+          onClick={() => navigate(-1)}
           className="inline-flex items-center text-sm font-medium text-[#FF5733] mb-6 hover:underline hover:text-white "
         >
           <ArrowLeft className="mr-2 h-4 w-4 " />
           Retour à l'accueil
-        </a>
+        </button>
 
         <div className="bg-[#1a1a24] rounded-lg shadow-md p-6 md:p-8">
           <h1 className="text-3xl font-bold text-center mb-8 text-red-500">
@@ -113,10 +123,10 @@ const PolitiqueConfidentialite = () => {
             <p className="text-white leading-relaxed">
               Nous pouvons mettre à jour cette politique de confidentialité à
               tout moment. La version la plus récente sera toujours disponible à
-              l'adresse suivante :{" "}
+              l'adresse suivante :
               <a
                 href="https://gamesooq.com/politique-confidentialite"
-                className=" hover:underline text-[#FF5733]"
+                className="hover:underline text-[#FF5733]"
               >
                 https://gamesooq.com/politique-confidentialite
               </a>
@@ -127,7 +137,7 @@ const PolitiqueConfidentialite = () => {
           <Section title="8. Contact">
             <p className="text-white leading-relaxed">
               Si vous avez des questions ou souhaitez exercer vos droits, vous
-              pouvez nous contacter à{" "}
+              pouvez nous contacter à
               <a
                 href="mailto:contact@gamesooq.com"
                 className="text-primary hover:underline"

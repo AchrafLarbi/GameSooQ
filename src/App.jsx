@@ -18,6 +18,12 @@ const App = () => {
             path="/politique-confidentialite"
             element={<PolitiqueConfidentialite />}
           />
+          <Route
+            path="/privacy"
+            element={
+              <PolitiqueConfidentialite key={window.location.pathname} />
+            }
+          />
         </Routes>
       </div>
     </Router>

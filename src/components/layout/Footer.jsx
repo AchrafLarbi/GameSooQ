@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import header_icon from "../../assets/icons/header_icon.png";
+import { useNavigate } from "react-router-dom";
+
 
 function Footer() {
   const [showModal, setShowModal] = useState(false);
@@ -117,6 +119,12 @@ function Footer() {
     setShowModal(true);
   };
 
+  const navigate = useNavigate();
+  const handleOpenPolitique = () => {
+    navigate(`/politique-confidentialite`);
+    window.scrollTo(0, 0);
+  };
+
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -191,7 +199,7 @@ function Footer() {
 
         <div className="border-t border-gray-700 mt-6 pt-4 flex justify-between text-gray-400 text-sm">
           <p>© 2025 Gamesooq - Tous droits réservés</p>
-          <div className="flex space-x-4">
+          <div className="flex space-x-16">
             <button
               onClick={() => handleOpenModal(catalogueRules)}
               className="text-gray-300 hover:text-white underline"
@@ -203,6 +211,12 @@ function Footer() {
               className="text-gray-300 hover:text-white underline"
             >
               Règles de la communauté
+            </button>
+            <button
+              onClick={() => handleOpenPolitique()}
+              className="text-gray-300 hover:text-white underline"
+            >
+              Politique de confidentialité
             </button>
           </div>
         </div>

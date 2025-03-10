@@ -30,11 +30,6 @@ const AcceuilPage = () => {
           </p>
         </div>
 
-        <div className="w-full text-center mx-auto mt-10 ">
-          <p className="text-white  sm:text-lg lg:text-2xl mt-4 leading-relaxed mx-auto sm:px-8 lg:px-0 lg:mx-60">
-            Gamsooq est maintenant disponible sur
-          </p>
-        </div>
         {/* Download Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 sm:mt-10">
           <a
