@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { LayoutDashboard, Users, Gamepad2, MonitorPlay, FileText, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import header_icon from "@/assets/icons/header_icon.png";
+import User from "@/assets/animoji.png";
 
 const Sidebar = ({ activePage, setActivePage }) => {
   const navigate = useNavigate();
@@ -43,6 +44,18 @@ const Sidebar = ({ activePage, setActivePage }) => {
           ))}
         </nav>
       </div>
+
+
+      <div className="p-4 border-b border-white border-opacity-10 flex flex-row items-center space-x-3">
+        <img src={User} alt="User Avatar" className="w-16 h-16 mr-2 rounded-full " />
+        <div className="flex flex-col">
+          <p className="text-sm font-medium">admin@admin.com</p>
+          <span className="text-xs text-gray-400">Administrateur</span>
+        </div>
+      </div>
+
+
+
       <div className="p-4 ">
         <Button 
           variant="outline" 
