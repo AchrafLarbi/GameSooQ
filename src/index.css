@@ -45,3 +45,16 @@ body {
 .path-animate:nth-child(5) {
   animation-delay: 2s;
 }
+// In your CSS file
+.bg-wrapper {
+  background-attachment: fixed;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .bg-wrapper {
+    background-attachment: scroll; /* Use scroll instead of fixed for iOS */
+    /* You might also want to adjust these properties for iOS */
+    background-size: cover;
+    background-position: center;
+  }
+}
