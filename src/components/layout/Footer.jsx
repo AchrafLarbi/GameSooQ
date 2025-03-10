@@ -3,7 +3,6 @@ import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import header_icon from "../../assets/icons/header_icon.png";
 import { useNavigate } from "react-router-dom";
 
-
 function Footer() {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState("");
@@ -23,91 +22,90 @@ function Footer() {
   2- Annonces et contenu autorisés
   Pour garantir une place de marché fiable, chaque annonce doit respecter les règles suivantes :
   ✅ Publie uniquement des jeux vidéo, consoles et accessoires gaming.
-  ✅ Décris honnêtement l’état de ton article (ne cache pas les défauts).
-  ✅ Ajoute des photos claires et réelles de l’article (pas d’images trouvées sur Internet).
+  ✅ Décris honnêtement l'état de ton article (ne cache pas les défauts).
+  ✅ Ajoute des photos claires et réelles de l'article (pas d'images trouvées sur Internet).
   ❌ Il est interdit de vendre des produits piratés, contrefaits ou illégaux.
   ❌ Toute annonce mensongère, incomplète ou douteuse sera supprimée.
   
   3- Transactions sécurisées
   Sur GameSooq, chaque utilisateur est responsable de ses transactions. Pour éviter les mauvaises surprises :
-  ✅ Vérifie bien les détails avant d’acheter, vendre ou échanger un article.
+  ✅ Vérifie bien les détails avant d'acheter, vendre ou échanger un article.
   ✅ Favorise les rencontres en main propre dans un lieu public sécurisé.
   ✅ Si tu optes pour la livraison, utilise un service de confiance et exige un suivi.
   ❌ Ne partage jamais tes informations personnelles sensibles (numéro de carte bancaire, adresse complète, mots de passe).
   ❌ Évite les paiements douteux (ex : virements non sécurisés, chèques sans garantie).
   
   4- Comportement sur la plateforme
-  GameSooq est un espace d’échange sain et convivial. Voici quelques règles de bon usage :
+  GameSooq est un espace d'échange sain et convivial. Voici quelques règles de bon usage :
   ✅ Utilise un langage clair et courtois dans tes messages et discussions.
-  ✅ N’hésite pas à signaler les comportements suspects (annonce frauduleuse, membre malhonnête…).
+  ✅ N'hésite pas à signaler les comportements suspects (annonce frauduleuse, membre malhonnête…).
   ✅ Fais des offres raisonnables et respecte les décisions des vendeurs.
-  ❌ Le spam, la publicité non autorisée et les tentatives d’arnaque sont interdits.
+  ❌ Le spam, la publicité non autorisée et les tentatives d'arnaque sont interdits.
   ❌ Le non-respect des règles peut entraîner une suspension temporaire ou définitive du compte.
   
   5- Signalement et modération
   Nous faisons de notre mieux pour assurer un environnement sûr, mais nous comptons aussi sur toi !
-  🚨 Si tu repères une annonce frauduleuse, un comportement inapproprié ou un abus, signale-le immédiatement via l’option "Signaler" ou contacte notre support : contact@gamesooq.com.
+  🚨 Si tu repères une annonce frauduleuse, un comportement inapproprié ou un abus, signale-le immédiatement via l'option "Signaler" ou contacte notre support : contact@gamesooq.com.
   🚨 Les récidivistes et les personnes ne respectant pas les règles pourront voir leur compte suspendu ou supprimé.
-  🔹 En utilisant GameSooq, tu acceptes ces règles et t’engages à les respecter.
-  🔹 Merci de faire de GameSooq une communauté sûre, honnête et passionnée ! 🎮🔥
-  `;
+  🔹 En utilisant GameSooq, tu acceptes ces règles et t'engages à les respecter.
+  🔹 Merci de faire de GameSooq une communauté sûre, honnête et passionnée ! 🎮🔥`;
 
   const catalogueRules = `📜 RÈGLES DU CATALOGUE GAMESOOQ
   
-  GameSooq est une marketplace dédiée aux passionnés de jeux vidéo. Pour garantir une expérience fluide et sécurisée, chaque utilisateur doit respecter les règles suivantes lors de la publication d’une annonce.
+  GameSooq est une marketplace dédiée aux passionnés de jeux vidéo. Pour garantir une expérience fluide et sécurisée, chaque utilisateur doit respecter les règles suivantes lors de la publication d'une annonce.
   
   🎮 1. Produits autorisés à la vente
   Sur GameSooq, tu peux vendre les articles suivants :
   ✅ Jeux vidéo physiques et numériques (originaux et en bon état)
-  ✅ Consoles de jeux (neuves ou d’occasion, avec accessoires inclus si précisé)
+  ✅ Consoles de jeux (neuves ou d'occasion, avec accessoires inclus si précisé)
   ✅ Accessoires gaming (manettes, câbles, casques, volants, etc.)
   ✅ Cartes cadeaux et abonnements gaming (PSN, Xbox Live, Nintendo eShop, etc.)
   ✅ Produits dérivés liés aux jeux vidéo (figurines, posters, artbooks, etc.)
   
   🚫 2. Produits interdits à la vente
   Les articles suivants ne sont pas autorisés sur GameSooq :
-  ❌ Comptes de jeux (PSN, Xbox, Steam, etc.), clés d’activation non officielles
+  ❌ Comptes de jeux (PSN, Xbox, Steam, etc.), clés d'activation non officielles
   ❌ Jeux et consoles volés ou obtenus illégalement
-  ❌ Produits en mauvais état ou non fonctionnels sans mention explicite dans l’annonce
+  ❌ Produits en mauvais état ou non fonctionnels sans mention explicite dans l'annonce
   ❌ Contenus à caractère haineux, raciste, discriminatoire ou incitant à la violence
   ❌ Matériel ne respectant pas les lois en vigueur en Algérie
-  Tout manquement à ces règles entraînera la suppression de l’annonce et peut mener à la suspension du compte du vendeur.
+  Tout manquement à ces règles entraînera la suppression de l'annonce et peut mener à la suspension du compte du vendeur.
   
-  📝 3. Règles pour la création d’une annonce
-  Pour publier une annonce de qualité et attirer plus d’acheteurs, suis ces directives :
-  📷 Photos de l’article
-  Ajoute au moins 3 photos réelles de l’article, prises sous différents angles.
+  📝 3. Règles pour la création d'une annonce
+  Pour publier une annonce de qualité et attirer plus d'acheteurs, suis ces directives :
+  📷 Photos de l'article
+  Ajoute au moins 3 photos réelles de l'article, prises sous différents angles.
   Les images doivent être claires, nettes et sans filtres.
   Évite les images génériques prises sur Internet.
   Pour les consoles et accessoires électroniques, montre bien les câbles, manettes et éventuels défauts.
   🖊️ Titre et description
   Utilise un titre précis et clair (exemple : "PS5 – Édition Digitale avec 2 manettes – Bon état").
   Dans la description, mentionne :
-  ✔️ L’état général de l’article (neuf, très bon état, bon état, usé)
+  ✔️ L'état général de l'article (neuf, très bon état, bon état, usé)
   ✔️ Les éventuels défauts ou dysfonctionnements
   ✔️ Les accessoires inclus (ex : boîte, câbles, manettes)
   ✔️ La raison de la vente (facultatif mais recommandé)
-  Sois honnête et transparent pour éviter tout malentendu avec l’acheteur.
+  Sois honnête et transparent pour éviter tout malentendu avec l'acheteur.
   💰 Prix et négociation
-  Fixe un prix réaliste en fonction du marché et de l’état du produit.
-  Si tu acceptes les négociations, précise-le dans l’annonce.
+  Fixe un prix réaliste en fonction du marché et de l'état du produit.
+  Si tu acceptes les négociations, précise-le dans l'annonce.
   Les prix doivent être clairement affichés (pas de "Prix à discuter" sans indication).
   📍 Localisation et livraison
   Indique ton emplacement exact pour faciliter les transactions locales.
   Précise le mode de livraison accepté :
-  ✔️ Main à main : Fixe un lieu de rendez-vous sécurisé pour l’échange.
-  ✔️ Livraison via un transporteur : Précise si les frais de livraison sont à la charge de l’acheteur.
+  ✔️ Main à main : Fixe un lieu de rendez-vous sécurisé pour l'échange.
+  ✔️ Livraison via un transporteur : Précise si les frais de livraison sont à la charge de l'acheteur.
   
   ⚠️ 4. Règles de modération et sanctions
   GameSooq se réserve le droit de supprimer toute annonce ne respectant pas ces règles, notamment si :
-  🚫 L’annonce contient des informations fausses ou trompeuses.
-  🚫 L’article proposé est interdit par nos conditions d’utilisation.
-  🚫 L’annonce présente un prix abusif ou une escroquerie manifeste.
+  🚫 L'annonce contient des informations fausses ou trompeuses.
+  🚫 L'article proposé est interdit par nos conditions d'utilisation.
+  🚫 L'annonce présente un prix abusif ou une escroquerie manifeste.
   🚫 Le vendeur est signalé par plusieurs utilisateurs pour comportement frauduleux.
-  En cas d’infraction répétée, GameSooq peut suspendre ou bannir définitivement le compte concerné.
+  En cas d'infraction répétée, GameSooq peut suspendre ou bannir définitivement le compte concerné.
   
   💡 Conseils pour une vente réussie
-  ✔️ Soigne ton annonce : Des photos de qualité et une description détaillée attirent plus d’acheteurs.
+  ✔️ Soigne ton annonce : Des photos de qualité et une description détaillée attirent plus d'acheteurs.
   ✔️ Reste réactif : Réponds rapidement aux messages pour conclure plus vite ta vente.
   ✔️ Négocie avec respect : Accepte les offres raisonnables et reste courtois(e) dans tes échanges.
   ✔️ Privilégie les transactions sécurisées : Évite les paiements douteux et favorise les rencontres en lieux publics.
@@ -121,7 +119,7 @@ function Footer() {
 
   const navigate = useNavigate();
   const handleOpenPolitique = () => {
-    navigate(`/politique-confidentialite`);
+    navigate("/politique-confidentialite");
     window.scrollTo(0, 0);
   };
 
@@ -197,24 +195,26 @@ function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-6 pt-4 flex justify-between text-gray-400 text-sm">
-          <p>© 2025 Gamesooq - Tous droits réservés</p>
-          <div className="flex space-x-16">
+        <div className="border-t border-gray-700 mt-6 pt-4 flex flex-col sm:flex-row items-center justify-between text-gray-400 text-sm">
+          <p className="mb-4 sm:mb-0">© 2025 Gamesooq - Tous droits réservés</p>
+
+          {/* Changed this section to be responsive */}
+          <div className="flex flex-col sm:flex-row sm:space-x-4 md:space-x-8 lg:space-x-16 space-y-3 sm:space-y-0">
             <button
               onClick={() => handleOpenModal(catalogueRules)}
-              className="text-gray-300 hover:text-white underline"
+              className="text-gray-300 hover:text-white underline px-2"
             >
               Règles du catalogue
             </button>
             <button
               onClick={() => handleOpenModal(communityRules)}
-              className="text-gray-300 hover:text-white underline"
+              className="text-gray-300 hover:text-white underline px-2"
             >
               Règles de la communauté
             </button>
             <button
-              onClick={() => handleOpenPolitique()}
-              className="text-gray-300 hover:text-white underline"
+              onClick={() => handleOpenPolitique}
+              className="text-gray-300 hover:text-white underline px-2"
             >
               Politique de confidentialité
             </button>
@@ -224,7 +224,7 @@ function Footer() {
 
       {showModal && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center p-4"
+          className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center p-4 z-50"
           onClick={handleCloseModal}
         >
           <div
