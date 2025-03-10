@@ -1,4 +1,4 @@
-import acceuil_bg from "../assets/background/bg.png";
+import acceuil_bg from "../assets/background/acceuil_bg.png";
 import AcceuilPageMiddle from "./AcceuilPageMiddle";
 
 const AcceuilPage = () => {

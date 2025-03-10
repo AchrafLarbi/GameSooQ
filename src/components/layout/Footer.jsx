@@ -190,7 +190,7 @@ function Footer() {
             <ul className="space-y-2 text-sm">
               <li>Formulaire</li>
               <li>+213 (0) 23 22 65 75</li>
-              <li>Contact@gamesooq.com</li>
+              <li>contact@gamesooq.com</li>
             </ul>
           </div>
         </div>
