@@ -35,6 +35,119 @@ const PolitiqueConfidentialite = () => {
           Retour à l'accueil
         </button>
 
+        <div className="bg-[#1a1a24] rounded-lg shadow-md p-6 md:p-8 mb-10">
+          <h1 className="text-3xl font-bold text-center mb-8 text-red-500">
+            PRIVACY POLICY APP GameSooq
+          </h1>
+
+          <Section title="1. Introduction">
+            <p className="text-white leading-relaxed">
+              Welcome to GameSooq. We highly value the privacy of your data and
+              are committed to protecting it. This policy explains what
+              information we collect, how we use it, and what your rights are.
+            </p>
+          </Section>
+
+          <Section title="2. Information Collected">
+            <p className="text-white leading-relaxed mb-4">
+              When you use GameSooq, we collect and store the following
+              information:
+            </p>
+            <ul className="list-disc pl-6 text-white space-y-2">
+              {[
+                "Full name (for identification within the app).",
+                "Email address (for account creation and password recovery).",
+                "Date of birth (to ensure the user meets the required age to use the app).",
+                "Phone number (for account verification and communication).",
+              ].map((item, index) => (
+                <ListItem key={index}>{item}</ListItem>
+              ))}
+            </ul>
+            <p className="text-white leading-relaxed mt-4">
+              These data are securely stored on Firebase, a service provided by
+              Google.
+            </p>
+          </Section>
+
+          <Section title="3. Use of Data">
+            <p className="text-white leading-relaxed mb-4">
+              We use this information solely to:
+            </p>
+            <ul className="list-disc pl-6 text-white space-y-2">
+              {[
+                "Enable the creation and management of your user account.",
+                "Improve the app’s features.",
+                "Develop new functionalities tailored to our users.",
+                "Contact you when necessary (e.g., for important notifications related to the app).",
+              ].map((item, index) => (
+                <ListItem key={index}>{item}</ListItem>
+              ))}
+            </ul>
+          </Section>
+
+          <Section title="4. Data Storage and Security">
+            <p className="text-white leading-relaxed">
+              All user data is securely stored on Firebase. We implement
+              security measures to prevent unauthorized access, loss, or
+              alteration of your information.
+            </p>
+          </Section>
+
+          <Section title="5. Data Sharing">
+            <p className="text-white leading-relaxed">
+              We do not share your information with third parties. Your data is
+              strictly used for the operation and improvement of the
+              application.
+            </p>
+          </Section>
+
+          <Section title="6. Your Rights">
+            <p className="text-white leading-relaxed mb-4">
+              You have the following rights regarding your personal data:
+            </p>
+            <ul className="list-disc pl-6 text-white space-y-2">
+              {[
+                "Access your information.",
+                "Correct or update your information.",
+                "Delete your account and personal data.",
+              ].map((item, index) => (
+                <ListItem key={index}>{item}</ListItem>
+              ))}
+            </ul>
+          </Section>
+
+          <Section title="7. Policy Changes">
+            <p className="text-white leading-relaxed">
+              We may update this privacy policy at any time. The most recent
+              version will always be available at the following address:
+              <a
+                href="https://gamesooq.com/privacy"
+                className="hover:underline text-[#FF5733]"
+              >
+                https://gamesooq.com/privacy
+              </a>
+              .
+            </p>
+          </Section>
+
+          <Section title="8. Contact">
+            <p className="text-white leading-relaxed">
+              If you have any questions or wish to exercise your rights, you can
+              contact us at
+              <a
+                href="mailto:contact@gamesooq.com"
+                className="text-primary hover:underline"
+              >
+                contact@gamesooq.com
+              </a>
+              .
+            </p>
+          </Section>
+
+          <div className="text-center text-sm text-gray-500 mt-12">
+            <p>© {currentYear} GameSooq - All rights reserved</p>
+          </div>
+        </div>
         <div className="bg-[#1a1a24] rounded-lg shadow-md p-6 md:p-8">
           <h1 className="text-3xl font-bold text-center mb-8 text-red-500">
             Politique de Confidentialité
