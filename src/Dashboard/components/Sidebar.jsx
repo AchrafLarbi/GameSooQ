@@ -1,12 +1,10 @@
-import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, Gamepad2, Monitor, FileText, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, Gamepad2, MonitorPlay, FileText, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import header_icon from "@/assets/icons/header_icon.png";
 
 const Sidebar = ({ activePage, setActivePage }) => {
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
@@ -14,46 +12,47 @@ const Sidebar = ({ activePage, setActivePage }) => {
   };
 
   const menuItems = [
-    { index: 0, path: "home", label: "Tableau de Bord", icon: <LayoutDashboard size={20} /> },
-    { index: 1, path: "users", label: "Utilisateurs", icon: <Users size={20} /> },
-    { index: 2, path: "games", label: "Jeux", icon: <Gamepad2 size={20} /> },
-    { index: 3, path: "consoles", label: "Consoles", icon: <Monitor size={20} /> },
-    { index: 4, path: "posts", label: "Posts", icon: <FileText size={20} /> },
+    { path: "home", label: "Tableau de Bord", icon: LayoutDashboard },
+    { path: "users", label: "Utilisateurs", icon: Users },
+    { path: "games", label: "Jeux", icon: Gamepad2 },
+    { path: "consoles", label: "Consoles", icon: MonitorPlay },
+    { path: "posts", label: "Posts", icon: FileText },
   ];
 
   return (
-    <div className="w-64 min-h-screen bg-black text-white p-6 flex flex-col justify-between">
-      <div className="flex flex-col items-center mb-16 mt-10">
-        <img
-          src={header_icon || "/placeholder.svg"}
-          alt="Logo"
-          className="w-40 h-auto mr-4"
-        />
+    <div className="flex flex-col h-screen w-80 bg-black border-r border-white border-opacity-10 text-white shadow-xl p-4">
+      <div className="p-6 flex items-center justify-center">
+        <img src={header_icon || "/placeholder.svg"} alt="Logo" className="w-50 p-5 h-auto mr-4 shadow-lg my-6" />
       </div>
-
-      <nav className="flex-1 space-y-4">
-        {menuItems.map((item) => (
-          <NavLink
-            key={item.index}
-            to={item.path}
-            className={({ isActive }) =>
-              isActive ? "text-white font-bold" : "text-gray-400"
-            }
-            onClick={() => setActivePage(item.label)}
-          >
-            <Button variant="ghost" className="w-full flex justify-start gap-2 px-3 py-2 rounded-lg hover:bg-gray-800">
-              {item.icon} {item.label}
-            </Button>
-          </NavLink>
-        ))}
-      </nav>
-
-      <div className="absolute bottom-5 left-5">
-        <Button variant="destructive" className="flex gap-2 hover:text-[#ff0000]" onClick={handleLogout}>
-          <LogOut size={20} /> Déconnexion
+      <div className="flex-1 px-2 py-2">
+        <nav className="space-y-4">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              className={({ isActive }) =>
+                `flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 ${
+                  isActive ? "bg-white text-black shadow-md" : "text-gray-400 hover:text-white hover:bg-white hover:bg-opacity-10"
+                }`
+              }
+              onClick={() => setActivePage(item.label)}
+            >
+              <item.icon className="mr-3 h-5 w-5" />
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+      </div>
+      <div className="p-4 ">
+        <Button 
+          variant="outline" 
+          className="w-full flex items-center justify-start text-gray-400 hover:bg-red-600 hover:text-white rounded-xl py-3 border-black"
+          onClick={handleLogout}
+        >
+          <LogOut className="mr-3 h-5 w-5" />
+          Déconnexion
         </Button>
       </div>
-      
     </div>
   );
 };
