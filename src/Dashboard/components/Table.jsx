@@ -24,8 +24,9 @@ export const DataTable = ({ title, data, columns, searchKey, onAdd }) => {
           className="w-1/3 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500"
         />
         <Button
-          className="bg-gray-900 hover:bg-gray-800 text-zinc-700 "
+          className=" hover:bg-zinc-950 text-zinc-950 "
           onClick={onAdd}
+          variant="outline"
         >
           Ajouter
         </Button>
@@ -37,7 +38,7 @@ export const DataTable = ({ title, data, columns, searchKey, onAdd }) => {
             {columns.map((col) => (
               <TableHead
                 key={col.accessorKey || col.id}
-                className="p-3 text-left text-gray-500  font-medium"
+                className="p-3 text-left text-gray-400  font-medium"
               >
                 {col.header}
               </TableHead>
@@ -77,21 +78,6 @@ export const DataTable = ({ title, data, columns, searchKey, onAdd }) => {
           ))}
         </TableBody>
       </Table>
-
-      <div className="mt-6 flex justify-between">
-        <Button
-          variant="outline"
-          className="border-gray-300 text-gray-700 hover:bg-gray-600"
-        >
-          Précédent
-        </Button>
-        <Button
-          variant="outline"
-          className="border-gray-300 text-gray-700 hover:bg-gray-500"
-        >
-          Suivant
-        </Button>
-      </div>
     </div>
   );
 };

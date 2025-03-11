@@ -14,7 +14,6 @@ import { Label } from "@/components/ui/label";
 
 export function GameForm({ game, isOpen, onClose, onSave }) {
   const [formData, setFormData] = useState({
-    id: "",
     name: "",
     image: "",
   });
@@ -24,7 +23,6 @@ export function GameForm({ game, isOpen, onClose, onSave }) {
       setFormData(game); // Initialize form data with the current game
     } else {
       setFormData({
-        id: "",
         name: "",
         image: "",
       }); // Reset form data when adding a new game
@@ -45,13 +43,15 @@ export function GameForm({ game, isOpen, onClose, onSave }) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>{game ? "Edit Game" : "Add Game"}</DialogTitle>
+          <DialogTitle>
+            {game ? "Modifier Un Jeu" : "Ajouter Un Jeu"}
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
-                Name
+                Nom
               </Label>
               <Input
                 id="name"
@@ -64,7 +64,7 @@ export function GameForm({ game, isOpen, onClose, onSave }) {
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="image" className="text-right">
-                Image URL
+                URL de Image
               </Label>
               <Input
                 id="image"
@@ -77,7 +77,9 @@ export function GameForm({ game, isOpen, onClose, onSave }) {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Save</Button>
+            <Button type="submit" variant="outline">
+              Enregistrer
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

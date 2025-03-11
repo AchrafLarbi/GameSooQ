@@ -7,18 +7,32 @@ import { Button } from "@/components/ui/button";
 import { GameForm } from "../forms/game-form";
 import { DeleteConfirmation } from "@/Dashboard/components/delete-confirmation";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchGames, addGame, deleteGame } from "@/features/gameSlice";
+import {
+  fetchGames,
+  addGame,
+  deleteGame,
+  updateGame,
+  setCurrentPage,
+  fetchTotalGamesCount,
+} from "@/features/gameSlice";
 
 export default function GamesPage() {
   const dispatch = useDispatch();
-  const games = useSelector((state) => state.games.items);
+  const {
+    items: games,
+    currentPage,
+    totalPages,
+    gamesPerPage,
+    loading,
+  } = useSelector((state) => state.games);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [currentGame, setCurrentGame] = useState(null);
 
   useEffect(() => {
-    dispatch(fetchGames());
-  }, [dispatch]);
+    dispatch(fetchGames({ page: currentPage, limit: gamesPerPage }));
+    dispatch(fetchTotalGamesCount());
+  }, [dispatch, currentPage, gamesPerPage]);
 
   const columns = [
     {
@@ -29,13 +43,11 @@ export default function GamesPage() {
       accessorKey: "image",
       header: "Image",
       cell: ({ row }) => {
-        // console.log(row);
         const game = row;
-
         return (
           <img
-            src={game?.image}
-            alt={game?.name}
+            src={game?.image || "https://via.placeholder.com/100"} // Fallback image if game.image is undefined
+            alt={game?.name || "Game image"}
             className="w-16 h-16 object-cover rounded"
           />
         );
@@ -86,7 +98,7 @@ export default function GamesPage() {
   const handleSave = async (gameData) => {
     if (currentGame) {
       // Update existing game
-      await dispatch(addGame({ ...gameData, id: currentGame.id }));
+      await dispatch(updateGame({ id: currentGame.id, ...gameData }));
     } else {
       // Add new game
       await dispatch(addGame(gameData));
@@ -98,6 +110,18 @@ export default function GamesPage() {
     if (currentGame) {
       await dispatch(deleteGame(currentGame.id));
       setIsDeleteOpen(false);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      dispatch(setCurrentPage(currentPage + 1));
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      dispatch(setCurrentPage(currentPage - 1));
     }
   };
 
@@ -127,6 +151,23 @@ export default function GamesPage() {
           currentGame?.name || "this game"
         }? This action cannot be undone.`}
       />
+
+      <div className="mt-4 flex justify-between">
+        <Button
+          variant="outline"
+          onClick={handlePreviousPage}
+          disabled={currentPage === 1 || loading}
+        >
+          Précédent
+        </Button>
+        <Button
+          variant="outline"
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages || loading}
+        >
+          Suivant
+        </Button>
+      </div>
     </div>
   );
 }
