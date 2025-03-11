@@ -8,11 +8,11 @@ const Admin = () => {
 
   useEffect(() => {
     const pathToPage = {
-      "/admin/home": "Tableau de Bord",
-      "/admin/users": "Utilisateurs",
-      "/admin/games": "Jeux",
-      "/admin/consoles": "Consoles",
-      "/admin/posts": "Posts",
+      "/operation/home": "Tableau de Bord",
+      "/operation/users": "Utilisateurs",
+      "/operation/games": "Jeux",
+      "/operation/consoles": "Consoles",
+      "/operation/posts": "Posts",
     };
     setActivePage(pathToPage[location.pathname] || "Tableau de Bord");
   }, [location.pathname]);
@@ -22,8 +22,10 @@ const Admin = () => {
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
       <div className="flex-1 p-6 mt-7 ">
         <h1 className="text-3xl font-bold ml-6 ">{activePage}</h1>
-        <p className="text-gray-400 ml-6 ">Bienvenue sur votre tableau de bord administrateur</p>
-        <Outlet /> 
+        <p className="text-gray-400 ml-6 ">
+          Bienvenue sur votre tableau de bord administrateur
+        </p>
+        <Outlet />
       </div>
     </div>
   );

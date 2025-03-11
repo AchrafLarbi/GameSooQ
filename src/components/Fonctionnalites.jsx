@@ -129,7 +129,7 @@ const FeaturesSection = () => {
                       <Motion.img
                         src={feature.img || "/placeholder.svg"}
                         alt="GameSooq Mobile App Interface"
-                        className="w-4/12 xl:w-6/12 max-w-md mx-auto "
+                        className="w-5/12 xl:w-7/12 max-w-md mx-auto "
                         initial={{ scale: 0.95, rotate: -2 }}
                         animate={{
                           scale: 1,

@@ -1,54 +1,97 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
-const DataTable = ({ title, data, columns }) => {
+export const DataTable = ({ title, data, columns, searchKey, onAdd }) => {
   return (
-    <div className="p-6 w-full">
-      <h1 className="text-3xl font-bold">{title}</h1>
-      <p className="text-gray-400 mb-4">Gérez les {title.toLowerCase()} de votre plateforme</p>
+    <div className="p-6 w-full  shadow-sm rounded-lg">
+      <h1 className="text-2xl font-bold text-white mb-2">{title}</h1>
+      <p className="text-gray-600 mb-6">
+        Gérez le catalogue de {title.toLowerCase()}
+      </p>
 
-      <div className="flex justify-between mb-4">
-        <input type="text" placeholder="Rechercher..." className="p-2 rounded bg-gray-900 text-white w-1/3" />
-        <Button className="flex gap-2">
-          <Plus size={18} /> Ajouter
+      <div className="flex justify-between items-center mb-6">
+        <Input
+          type="text"
+          placeholder="Rechercher..."
+          className="w-1/3 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500"
+        />
+        <Button
+          className="bg-gray-900 hover:bg-gray-800 text-zinc-700 "
+          onClick={onAdd}
+        >
+          Ajouter
         </Button>
       </div>
 
-      <Table className="w-full bg-gray-900 rounded-lg">
-        <TableHeader>
+      <Table className="w-full  border-white">
+        <TableHeader className="hover:bg-zinc-700">
           <TableRow>
             {columns.map((col) => (
-              <TableHead key={col}>{col}</TableHead>
+              <TableHead
+                key={col.accessorKey || col.id}
+                className="p-3 text-left text-gray-500  font-medium"
+              >
+                {col.header}
+              </TableHead>
             ))}
-            <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {data.map((row, index) => (
-            <TableRow key={index}>
-              {Object.values(row).map((cell, i) => (
-                <TableCell key={i}>{cell}</TableCell>
-              ))}
-              <TableCell className="flex gap-2">
-                <Button variant="outline" size="icon">
-                  <Pencil size={16} />
-                </Button>
-                <Button variant="destructive" size="icon">
-                  <Trash2 size={16} />
-                </Button>
-              </TableCell>
+            <TableRow
+              key={index}
+              className="hover:bg-zinc-700 transition-colors"
+            >
+              {columns.map((col) => {
+                if (col.cell) {
+                  // Use custom cell rendering if provided
+                  return (
+                    <TableCell
+                      key={col.accessorKey || col.id}
+                      className="p-3 border-t border-gray-200"
+                    >
+                      {col.cell({ row })}
+                    </TableCell>
+                  );
+                } else {
+                  // Default cell rendering
+                  return (
+                    <TableCell
+                      key={col.accessorKey || col.id}
+                      className="p-3  border-t border-gray-200"
+                    >
+                      {row[col.accessorKey]}
+                    </TableCell>
+                  );
+                }
+              })}
             </TableRow>
           ))}
         </TableBody>
       </Table>
 
-      <div className="mt-4 flex justify-between">
-        <Button variant="outline">Précédent</Button>
-        <Button variant="outline">Suivant</Button>
+      <div className="mt-6 flex justify-between">
+        <Button
+          variant="outline"
+          className="border-gray-300 text-gray-700 hover:bg-gray-600"
+        >
+          Précédent
+        </Button>
+        <Button
+          variant="outline"
+          className="border-gray-300 text-gray-700 hover:bg-gray-500"
+        >
+          Suivant
+        </Button>
       </div>
     </div>
   );
 };
-
-export default DataTable;
