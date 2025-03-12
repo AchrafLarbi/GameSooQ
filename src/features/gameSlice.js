@@ -13,6 +13,7 @@ import {
   orderBy,
   startAt,
   endAt,
+  where,
   getCountFromServer,
 } from "firebase/firestore";
 
@@ -103,19 +104,18 @@ export const searchGames = createAsyncThunk(
       if (page > 1 && pageCache[`search_${normalizedQuery}_${page - 1}`]) {
         q = query(
           gamesRef,
+          where("name", ">=", searchQuery),
+          where("name", "<=", searchQuery + "\uf8ff"),
           orderBy("name"),
-          startAt(normalizedQuery),
-          endAt(normalizedQuery + "\uf8ff"),
-          startAfter(pageCache[`search_${normalizedQuery}_${page - 1}`]),
           limit(pageLimit)
         );
       } else {
         // First page of search or no cache
         q = query(
           gamesRef,
+          where("name", ">=", searchQuery),
+          where("name", "<=", searchQuery + "\uf8ff"),
           orderBy("name"),
-          startAt(normalizedQuery),
-          endAt(normalizedQuery + "\uf8ff"),
           limit(pageLimit)
         );
       }
@@ -189,11 +189,10 @@ export const addGame = createAsyncThunk(
   "Games/add",
   async (game, { dispatch, getState }) => {
     try {
-      // Ensure name field is lowercase for better searching
+      // No nameLower transformation, just save the name and image as they are
       const gameData = {
-        ...game,
         name: game.name,
-        nameLower: game.name.toLowerCase(),
+        image: game.image,
       };
 
       const docRef = await addDoc(collection(db, "Games"), gameData);
@@ -274,10 +273,11 @@ export const updateGame = createAsyncThunk(
   "Games/update",
   async ({ id, ...gameData }, { dispatch, getState }) => {
     try {
-      // Ensure name field is lowercase for better searching
+      // No need for nameLower field, just update name and image as they are
       const updatedData = {
         ...gameData,
-        nameLower: gameData.name ? gameData.name.toLowerCase() : undefined,
+        name: gameData.name,
+        image: gameData.image,
       };
 
       const gameRef = doc(db, "Games", id);

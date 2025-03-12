@@ -195,16 +195,45 @@ export default function GamesPage() {
       setIsDeleteOpen(false);
     }
   };
-
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      dispatch(setCurrentPage(currentPage + 1));
+      const nextPage = currentPage + 1;
+      dispatch(setCurrentPage(nextPage));
+
+      if (filterApplied) {
+        // Fetch next page of search results
+        dispatch(
+          searchGames({
+            query: searchTerm,
+            page: nextPage,
+            limit: gamesPerPage,
+          })
+        );
+      } else {
+        // Fetch next page of normal games
+        dispatch(fetchGames({ page: nextPage, limit: gamesPerPage }));
+      }
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      dispatch(setCurrentPage(currentPage - 1));
+      const prevPage = currentPage - 1;
+      dispatch(setCurrentPage(prevPage));
+
+      if (filterApplied) {
+        // Fetch previous page of search results
+        dispatch(
+          searchGames({
+            query: searchTerm,
+            page: prevPage,
+            limit: gamesPerPage,
+          })
+        );
+      } else {
+        // Fetch previous page of normal games
+        dispatch(fetchGames({ page: prevPage, limit: gamesPerPage }));
+      }
     }
   };
 
