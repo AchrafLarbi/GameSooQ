@@ -9,19 +9,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export const DataTable = ({ title, data, columns, searchKey, onAdd }) => {
+export const DataTable = ({ data, columns, onAdd, onSearch, value }) => {
   return (
     <div className="p-6 w-full  shadow-sm rounded-lg">
-      <h1 className="text-2xl font-bold text-white mb-2">{title}</h1>
-      <p className="text-gray-600 mb-6">
-        Gérez le catalogue de {title.toLowerCase()}
-      </p>
-
       <div className="flex justify-between items-center mb-6">
         <Input
           type="text"
           placeholder="Rechercher..."
           className="w-1/3 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500"
+          onChange={onSearch}
+          value={value}
         />
         <Button
           className=" hover:bg-zinc-950 text-zinc-950 "
