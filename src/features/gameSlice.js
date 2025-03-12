@@ -11,8 +11,6 @@ import {
   limit,
   startAfter,
   orderBy,
-  startAt,
-  endAt,
   where,
   getCountFromServer,
 } from "firebase/firestore";
@@ -100,8 +98,8 @@ export const searchGames = createAsyncThunk(
       const normalizedQuery = searchQuery.toLowerCase();
       let q;
 
-      // Check if we have a cached search result
-      if (page > 1 && pageCache[`search_${normalizedQuery}_${page - 1}`]) {
+      // First page or no cache
+      if (page === 1 || !pageCache[`search_${normalizedQuery}_${page - 1}`]) {
         q = query(
           gamesRef,
           where("name", ">=", searchQuery),
@@ -110,12 +108,14 @@ export const searchGames = createAsyncThunk(
           limit(pageLimit)
         );
       } else {
-        // First page of search or no cache
+        // For subsequent pages, use the startAfter with the cached document
+        const lastDoc = pageCache[`search_${normalizedQuery}_${page - 1}`];
         q = query(
           gamesRef,
           where("name", ">=", searchQuery),
           where("name", "<=", searchQuery + "\uf8ff"),
           orderBy("name"),
+          startAfter(lastDoc),
           limit(pageLimit)
         );
       }
@@ -135,14 +135,22 @@ export const searchGames = createAsyncThunk(
       // Update total count for search results
       const countQuery = query(
         gamesRef,
-        orderBy("name"),
-        startAt(normalizedQuery),
-        endAt(normalizedQuery + "\uf8ff")
+        where("name", ">=", searchQuery),
+        where("name", "<=", searchQuery + "\uf8ff")
       );
-      const countSnapshot = await getCountFromServer(countQuery);
-      dispatch(setSearchResultsCount(countSnapshot.data().count));
 
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      const countSnapshot = await getCountFromServer(countQuery);
+      const total = countSnapshot.data().count;
+
+      // Calculate total pages
+      const totalPages = Math.ceil(total / pageLimit);
+      dispatch(setTotalPages(totalPages));
+
+      // Return both the data and the total for easier state updates
+      return {
+        items: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+        total,
+      };
     } catch (error) {
       console.error("Error searching games:", error);
       throw error;
@@ -370,8 +378,24 @@ const gameSlice = createSlice({
         state.loading = false;
       })
       .addCase(searchGames.fulfilled, (state, action) => {
-        state.items = action.payload;
+        if (action.payload) {
+          // If the payload has the expected structure
+          if (action.payload.items) {
+            state.items = action.payload.items;
+
+            // If total is provided, update totalPages
+            if (action.payload.total !== undefined) {
+              state.totalPages = Math.ceil(
+                action.payload.total / state.gamesPerPage
+              );
+            }
+          } else {
+            // Fallback for backward compatibility
+            state.items = action.payload;
+          }
+        }
         state.loading = false;
+        state.initialFetchDone = true;
       })
       .addCase(searchGames.pending, (state) => {
         state.loading = true;

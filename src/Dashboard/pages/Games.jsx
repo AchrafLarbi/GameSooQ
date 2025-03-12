@@ -50,10 +50,22 @@ export default function GamesPage() {
     }
   }, [dispatch, initialFetchDone, isMounted]);
 
-  // Effect for fetching games based on page (pagination) without search
+  // Effect for fetching games based on page (pagination) with or without search
   useEffect(() => {
-    if (isMounted && initialFetchDone && !searchTerm.trim()) {
-      dispatch(fetchGames({ page: currentPage, limit: gamesPerPage }));
+    if (isMounted && initialFetchDone) {
+      if (searchTerm.trim()) {
+        // Search applied, fetch games with search query
+        dispatch(
+          searchGames({
+            query: searchTerm,
+            page: currentPage,
+            limit: gamesPerPage,
+          })
+        );
+      } else {
+        // No search, fetch games normally
+        dispatch(fetchGames({ page: currentPage, limit: gamesPerPage }));
+      }
     }
   }, [
     dispatch,
@@ -68,42 +80,29 @@ export default function GamesPage() {
     const value = e.target.value;
     setSearchTerm(value);
 
-    // Clear the previous timeout for debounce
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
 
     const timeoutId = setTimeout(() => {
-      // Always reset to page 1 when search term changes
-      dispatch(setCurrentPage(1));
+      dispatch(setCurrentPage(1)); // Reset to page 1 when searching
+      dispatch(setFilterApplied(value.trim() !== ""));
 
       if (value.trim() === "") {
-        // If search term is empty, reset filter and fetch all games
-        dispatch(setFilterApplied(false));
-
-        // First fetch the total games count to ensure correct pagination
-        dispatch(fetchTotalGamesCount()).then(() => {
-          // Then fetch the first page of games
-          dispatch(fetchGames({ page: 1, limit: gamesPerPage }));
-
-          // Make sure totalPages is updated based on the total games count
-          dispatch(setTotalPages());
+        // Reset the search and fetch all games
+        dispatch(fetchTotalGamesCount()).then((action) => {
+          if (action.payload) {
+            const total = action.payload.total;
+            dispatch(setTotalPages(Math.ceil(total / gamesPerPage)));
+            dispatch(fetchGames({ page: 1, limit: gamesPerPage }));
+          }
         });
       } else {
-        // If search term is not empty, apply filter and search
-        dispatch(setFilterApplied(true));
-
-        // Dispatch the search games action
-        dispatch(
-          searchGames({
-            query: value,
-            page: 1,
-            limit: gamesPerPage,
-          })
-        );
-        // The thunk already handles updating searchResultsCount and totalPages
+        // Perform search if there is a value
+        dispatch(searchGames({ query: value, page: 1, limit: gamesPerPage }));
+        // The totalPages will be set in the reducer based on the search results
       }
-    }, 500); // 500ms debounce
+    }, 500);
 
     setSearchTimeout(timeoutId);
   };
@@ -195,45 +194,16 @@ export default function GamesPage() {
       setIsDeleteOpen(false);
     }
   };
+
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      const nextPage = currentPage + 1;
-      dispatch(setCurrentPage(nextPage));
-
-      if (filterApplied) {
-        // Fetch next page of search results
-        dispatch(
-          searchGames({
-            query: searchTerm,
-            page: nextPage,
-            limit: gamesPerPage,
-          })
-        );
-      } else {
-        // Fetch next page of normal games
-        dispatch(fetchGames({ page: nextPage, limit: gamesPerPage }));
-      }
+      dispatch(setCurrentPage(currentPage + 1));
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
-      const prevPage = currentPage - 1;
-      dispatch(setCurrentPage(prevPage));
-
-      if (filterApplied) {
-        // Fetch previous page of search results
-        dispatch(
-          searchGames({
-            query: searchTerm,
-            page: prevPage,
-            limit: gamesPerPage,
-          })
-        );
-      } else {
-        // Fetch previous page of normal games
-        dispatch(fetchGames({ page: prevPage, limit: gamesPerPage }));
-      }
+      dispatch(setCurrentPage(currentPage - 1));
     }
   };
 
