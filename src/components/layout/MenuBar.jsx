@@ -27,18 +27,20 @@ const MenuBar = ({ isMobile = false, closeMenu }) => {
   }, [location.pathname]);
 
   const handleMenuClick = (item, index) => {
-    // Always navigate to the home page with the specific section
-    navigate("/", { replace: true });
-
-    // Set timeout to ensure navigation completes before scrolling
+    if (item.label === "Aide") {
+      navigate("/FAQ", { replace: true });
+    } else {
+      navigate("/", { replace: true });
+    }
+  
     setTimeout(() => {
       const section = document.getElementById(item.sectionId);
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
-        setActiveIndex(index); // Only set active index after navigating to home
+        setActiveIndex(index);
       }
     }, 100);
-
+  
     if (isMobile && closeMenu) {
       closeMenu();
     }
