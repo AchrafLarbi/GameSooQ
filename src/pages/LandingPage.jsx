@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import AcceuilPage from "../components/AcceuilPage";
@@ -5,43 +7,43 @@ import Download from "../components/Download";
 import FAQsection from "../components/FAQSection";
 import Fonctionnalites from "../components/Fonctionnalites";
 import Caracteristiques from "../components/Caracteristiques";
-import FAQ from "../components/FAQ";
 import Form from "../components/Form";
-// import Services from "../components/Services";
-// import Galerie from "../components/Galerie";
-// import FeedbackForm from "../components/FeedbackForm";
-// import LocalisationSection from "../components/Localisation";
-// import Footer from "../components/layout/Footer";
-
-// // Import custom background image
-// import customBg from "../assets/custom_bg.png";
 
 const LandingPage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/FAQ") {
+      setTimeout(() => {
+        const faqSection = document.getElementById("aide");
+        if (faqSection) {
+          faqSection.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [location.pathname]);
+
   return (
     <div
       className="relative w-full h-full"
       style={{
-        backgroundImage: "linear-gradient(to bottom right, #1E1B2C, #2A1F3D)", // Apply the gradient properly
-        backgroundSize: "100%", // Ensure it covers the full area
+        backgroundImage: "linear-gradient(to bottom right, #1E1B2C, #2A1F3D)",
+        backgroundSize: "100%",
         backgroundPosition: "center",
-        backgroundAttachment: "fixed", // Keeps background fixed while scrolling
+        backgroundAttachment: "fixed",
       }}
     >
-      {/* Header Component */}
       <Header />
-
-      {/* Main Content */}
       <main>
         <AcceuilPage />
         <Caracteristiques />
         <Fonctionnalites />
         <Form />
-        <FAQ />
-        <FAQsection />
+        <section id="faq">
+          <FAQsection />
+        </section>
         <Download />
       </main>
-
-      {/* Footer Component */}
       <Footer />
     </div>
   );
