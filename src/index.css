@@ -45,7 +45,7 @@ body {
 .path-animate:nth-child(5) {
   animation-delay: 2s;
 }
-// In your CSS file
+
 .bg-wrapper {
   background-attachment: fixed !important;
 }

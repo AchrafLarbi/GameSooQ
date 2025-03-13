@@ -18,7 +18,7 @@ const Admin = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex bg-zinc-950 text-white min-h-screen">
+    <div className="flex bg-zinc-900 text-white min-h-screen">
       <Sidebar activePage={activePage} setActivePage={setActivePage} />
       <div className="flex-1 p-6 mt-7 ">
         <h1 className="text-3xl font-bold ml-6 ">{activePage}</h1>

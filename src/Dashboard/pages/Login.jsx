@@ -18,7 +18,7 @@
   
       if (email === "admin@admin.com" && password === "123456") {
         localStorage.setItem("isAuthenticated", "true"); 
-        navigate("/admin/home"); 
+        navigate("/operation/home"); 
       } else {
         alert("Invalid email or password"); 
       }

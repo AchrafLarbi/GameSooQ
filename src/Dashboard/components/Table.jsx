@@ -8,34 +8,36 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Plus } from "lucide-react";
 
 export const DataTable = ({ data, columns, onAdd, onSearch, value }) => {
   return (
-    <div className="p-6 w-full  shadow-sm rounded-lg">
+    <div className="p-6 w-full  shadow-sm rounded-lg ">
       <div className="flex justify-between items-center mb-6">
         <Input
           type="text"
           placeholder="Rechercher..."
-          className="w-1/3 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-gray-500"
+          className="w-1/3 p-2  rounded-xl  border border-zinc-800 border-[1px] p-5 focus:outline-none focus:border-zinc-700"
           onChange={onSearch}
           value={value}
         />
         <Button
-          className=" hover:bg-zinc-950 text-zinc-950 "
+          className="flex items-center gap-2 hover:bg-gray-300 hover:text-black hover:border-zinc-700 text-zinc-950 border rounded-xl"
           onClick={onAdd}
           variant="outline"
         >
+          <Plus className="w-5 h-5" />
           Ajouter
         </Button>
       </div>
 
-      <Table className="w-full  border-white">
+      <Table className="w-full border border-black border-collapse">
         <TableHeader className="hover:bg-zinc-700">
           <TableRow>
             {columns.map((col) => (
               <TableHead
                 key={col.accessorKey || col.id}
-                className="p-3 text-left text-gray-400  font-medium"
+                className="p-7 text-left text-gray-400  font-medium "
               >
                 {col.header}
               </TableHead>
@@ -54,7 +56,7 @@ export const DataTable = ({ data, columns, onAdd, onSearch, value }) => {
                   return (
                     <TableCell
                       key={col.accessorKey || col.id}
-                      className="p-3 border-t border-gray-200"
+                      className="p-7 border-t border-zinc-800"
                     >
                       {col.cell({ row })}
                     </TableCell>
@@ -64,7 +66,7 @@ export const DataTable = ({ data, columns, onAdd, onSearch, value }) => {
                   return (
                     <TableCell
                       key={col.accessorKey || col.id}
-                      className="p-3  border-t border-gray-200"
+                      className="p-7  border-t border-zinc-800"
                     >
                       {row[col.accessorKey]}
                     </TableCell>

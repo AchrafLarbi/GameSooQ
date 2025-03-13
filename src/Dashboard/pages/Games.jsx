@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Trash2, Image, ArrowRight, ArrowLeft } from "lucide-react";
 import { DataTable } from "@/Dashboard/components/Table";
 import { Button } from "@/components/ui/button";
 import { GameForm } from "../forms/game-form";
@@ -124,8 +124,9 @@ export default function GamesPage() {
                 href={game?.image || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800"
+                className="flex items-center gap-2 hover:bg-gray-300 hover:text-black hover:border-zinc-700 text-zinc-950 border rounded-xl"
               >
+                <Image className="w-5 h-5" />
                 View Image
               </a>
             </Button>
@@ -143,6 +144,7 @@ export default function GamesPage() {
                 variant="ghost"
                 size="icon"
                 onClick={() => handleEdit(game)}
+                className="hover:text-gray-400"
               >
                 <Edit className="h-4 w-4" />
               </Button>
@@ -150,6 +152,7 @@ export default function GamesPage() {
                 variant="ghost"
                 size="icon"
                 onClick={() => handleDelete(game)}
+                className="hover:text-red-600 "
               >
                 <Trash2 className="h-4 w-4" />
               </Button>
@@ -232,9 +235,8 @@ export default function GamesPage() {
         onClose={() => setIsDeleteOpen(false)}
         onConfirm={handleConfirmDelete}
         title="Delete Game"
-        description={`Are you sure you want to delete ${
-          currentGame?.name || "this game"
-        }? This action cannot be undone.`}
+        description={`Are you sure you want to delete ${currentGame?.name || "this game"
+          }? This action cannot be undone.`}
       />
 
       <div className="mt-4 flex justify-between items-center">
@@ -242,7 +244,9 @@ export default function GamesPage() {
           variant="outline"
           onClick={handlePreviousPage}
           disabled={currentPage === 1 || loading}
+          className="hover:bg-gray-300 hover:text-black hover:border-zinc-700 text-zinc-950 border rounded-xl "
         >
+          <ArrowLeft className="w-4 h-4" />
           Précédent
         </Button>
 
@@ -250,8 +254,10 @@ export default function GamesPage() {
           variant="outline"
           onClick={handleNextPage}
           disabled={currentPage === totalPages || loading}
+          className="flex items-center gap-2 hover:bg-gray-300 hover:text-black hover:border-zinc-700 text-zinc-950 border rounded-xl"
         >
           Suivant
+          <ArrowRight className="w-4 h-4" />
         </Button>
       </div>
 

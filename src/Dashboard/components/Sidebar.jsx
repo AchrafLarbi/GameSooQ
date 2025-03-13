@@ -28,7 +28,7 @@ const Sidebar = ({ setActivePage }) => {
   ];
 
   return (
-    <div className="flex flex-col h-screen w-80 bg-black border-r border-white border-opacity-10 text-white shadow-xl p-4">
+    <div className="flex flex-col h-screen w-80 bg-zinc-950 border-r border-white border-opacity-10 text-white shadow-xl p-4">
       <div className="p-6 flex items-center justify-center">
         <img
           src={header_icon || "/placeholder.svg"}
@@ -73,7 +73,7 @@ const Sidebar = ({ setActivePage }) => {
       <div className="p-4 ">
         <Button
           variant="outline"
-          className="w-full flex items-center justify-start text-gray-400 hover:bg-red-600 hover:text-white rounded-xl py-3 border-black"
+          className="w-full flex bg-zinc-950 items-center justify-start text-gray-400 hover:bg-red-600 hover:text-white rounded-xl py-3 border-zinc-950"
           onClick={handleLogout}
         >
           <LogOut className="mr-3 h-5 w-5" />
