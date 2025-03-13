@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Aide from "./pages/Aide";
+import FAQSection  from "./components/FAQSection";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import Login from "./Dashboard/pages/Login";
 import Admin from "./Dashboard/Admin";
@@ -10,6 +11,7 @@ import Games from "./Dashboard/pages/Games";
 import Consoles from "./Dashboard/pages/Consoles";
 import Posts from "./Dashboard/pages/Posts";
 import ProtectedRoute from "./Dashboard/ProtectedRoute";
+import { SAMLAuthProvider } from "firebase/auth";
 
 const App = () => {
   return (
@@ -25,6 +27,8 @@ const App = () => {
           path="/privacy"
           element={<PolitiqueConfidentialite key={window.location.pathname} />}
         />
+        <Route path="/FAQ" element={<LandingPage />} />
+
         <Route path="/login" element={<Login />} />
 
         <Route path="/operation" element={<ProtectedRoute />}>
