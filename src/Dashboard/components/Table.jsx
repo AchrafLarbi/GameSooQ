@@ -17,7 +17,7 @@ export const DataTable = ({ data, columns, onAdd, onSearch, value }) => {
         <Input
           type="text"
           placeholder="Rechercher..."
-          className="w-1/3 p-2  rounded-xl  border border-zinc-800 border-[1px] p-5 focus:outline-none focus:border-zinc-700"
+          className="w-1/3   rounded-xl   border-zinc-800 border-[1px] p-5 focus:outline-none focus:border-zinc-700"
           onChange={onSearch}
           value={value}
         />
@@ -66,7 +66,7 @@ export const DataTable = ({ data, columns, onAdd, onSearch, value }) => {
                   return (
                     <TableCell
                       key={col.accessorKey || col.id}
-                      className="p-7  border-t border-zinc-800"
+                      className="p-7 w-1/2 border-t border-zinc-800"
                     >
                       {row[col.accessorKey]}
                     </TableCell>

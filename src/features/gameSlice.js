@@ -4,6 +4,7 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
   deleteDoc,
   doc,
   updateDoc,
@@ -197,14 +198,18 @@ export const addGame = createAsyncThunk(
   "Games/add",
   async (game, { dispatch, getState }) => {
     try {
-      // No nameLower transformation, just save the name and image as they are
+      // Data for main Games collection
       const gameData = {
         name: game.name,
         image: game.image,
       };
 
+      // Add to main Games collection
       const docRef = await addDoc(collection(db, "Games"), gameData);
       const newGame = { id: docRef.id, ...gameData };
+
+      // Add to new_games collection with only name
+      await addDoc(collection(db, "new_games"), { name: game.name });
 
       // Clear cache to ensure fresh data
       Object.keys(pageCache).forEach((key) => delete pageCache[key]);
@@ -226,7 +231,6 @@ export const addGame = createAsyncThunk(
       } else {
         dispatch(fetchGames({ page: currentPage, limit: gamesPerPage }));
       }
-
       return newGame;
     } catch (error) {
       console.error("Error adding game:", error);
@@ -240,7 +244,28 @@ export const deleteGame = createAsyncThunk(
   "Games/delete",
   async (id, { dispatch, getState }) => {
     try {
+      // Get the game data before deletion to get the name
+      const gameSnapshot = await getDoc(doc(db, "Games", id));
+      const gameData = gameSnapshot.data();
+
+      // Delete from main Games collection
       await deleteDoc(doc(db, "Games", id));
+
+      // Delete from new_games collection
+      if (gameData && gameData.name) {
+        // Query to find the document in new_games with matching name
+        const newGamesQuery = query(
+          collection(db, "new_games"),
+          where("name", "==", gameData.name)
+        );
+
+        const querySnapshot = await getDocs(newGamesQuery);
+
+        // Delete all matching documents
+        querySnapshot.forEach(async (doc) => {
+          await deleteDoc(doc.ref);
+        });
+      }
 
       // Clear cache to ensure fresh data
       Object.keys(pageCache).forEach((key) => delete pageCache[key]);
@@ -267,7 +292,6 @@ export const deleteGame = createAsyncThunk(
       } else {
         dispatch(fetchGames({ page: currentPage, limit: gamesPerPage }));
       }
-
       return id;
     } catch (error) {
       console.error("Error deleting game:", error);
@@ -281,7 +305,11 @@ export const updateGame = createAsyncThunk(
   "Games/update",
   async ({ id, ...gameData }, { dispatch, getState }) => {
     try {
-      // No need for nameLower field, just update name and image as they are
+      // Get original game data to find matching document in new_games
+      const gameSnapshot = await getDoc(doc(db, "Games", id));
+      const originalGame = gameSnapshot.data();
+
+      // Update main Games collection
       const updatedData = {
         ...gameData,
         name: gameData.name,
@@ -290,6 +318,22 @@ export const updateGame = createAsyncThunk(
 
       const gameRef = doc(db, "Games", id);
       await updateDoc(gameRef, updatedData);
+
+      // Update in new_games collection
+      if (originalGame && originalGame.name) {
+        // Find the document in new_games with the original name
+        const newGamesQuery = query(
+          collection(db, "new_games"),
+          where("name", "==", originalGame.name)
+        );
+
+        const querySnapshot = await getDocs(newGamesQuery);
+
+        // Update all matching documents with the new name
+        querySnapshot.forEach(async (doc) => {
+          await updateDoc(doc.ref, { name: gameData.name });
+        });
+      }
 
       // Clear cache for the affected pages
       Object.keys(pageCache).forEach((key) => delete pageCache[key]);
@@ -308,7 +352,6 @@ export const updateGame = createAsyncThunk(
       } else {
         dispatch(fetchGames({ page: currentPage, limit: gamesPerPage }));
       }
-
       return { id, ...updatedData };
     } catch (error) {
       console.error("Error updating game:", error);

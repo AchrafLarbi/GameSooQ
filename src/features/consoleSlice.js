@@ -4,6 +4,8 @@ import {
   collection,
   addDoc,
   getDocs,
+  getDoc,
+  setDoc,
   deleteDoc,
   doc,
   updateDoc,
@@ -192,19 +194,26 @@ export const fetchTotalConsolesCount = createAsyncThunk(
   }
 );
 
-// Add a new game
+// Add a new console
 export const addConsole = createAsyncThunk(
   "Consoles/add",
-  async (game, { dispatch, getState }) => {
+  async (console, { dispatch, getState }) => {
     try {
-      // No nameLower transformation, just save the name and image as they are
-      const gameData = {
-        name: game.name,
-        image: game.image,
+      // Use the name as the document ID
+      const docId = console.name;
+
+      // Create data object with id equal to document ID
+      const consoleData = {
+        id: docId,
+        name: console.name,
+        image: console.image,
       };
 
-      const docRef = await addDoc(collection(db, "console"), gameData);
-      const newGame = { id: docRef.id, ...gameData };
+      // Use setDoc to create document with specific ID in main console collection
+      await setDoc(doc(db, "console", docId), consoleData);
+
+      // Also add to new_console collection with only name field
+      await addDoc(collection(db, "new_consoles"), { name: console.name });
 
       // Clear cache to ensure fresh data
       Object.keys(pageCache).forEach((key) => delete pageCache[key]);
@@ -227,7 +236,7 @@ export const addConsole = createAsyncThunk(
         dispatch(fetchConsoles({ page: currentPage, limit: gamesPerPage }));
       }
 
-      return newGame;
+      return consoleData;
     } catch (error) {
       console.error("Error adding console:", error);
       throw error;
@@ -235,12 +244,33 @@ export const addConsole = createAsyncThunk(
   }
 );
 
-// Delete a game
+// Delete a console
 export const deleteConsole = createAsyncThunk(
   "Consoles/delete",
   async (id, { dispatch, getState }) => {
     try {
+      // Get the console data before deletion to get the name
+      const consoleSnapshot = await getDoc(doc(db, "console", id));
+      const consoleData = consoleSnapshot.data();
+
+      // Delete from main console collection
       await deleteDoc(doc(db, "console", id));
+
+      // Delete from new_console collection (name-based matching)
+      if (consoleData && consoleData.name) {
+        // Query to find the document in new_console with matching name
+        const newConsoleQuery = query(
+          collection(db, "new_consoles"),
+          where("name", "==", consoleData.name)
+        );
+
+        const querySnapshot = await getDocs(newConsoleQuery);
+
+        // Delete all matching documents
+        querySnapshot.forEach(async (doc) => {
+          await deleteDoc(doc.ref);
+        });
+      }
 
       // Clear cache to ensure fresh data
       Object.keys(pageCache).forEach((key) => delete pageCache[key]);
@@ -276,20 +306,61 @@ export const deleteConsole = createAsyncThunk(
   }
 );
 
-// Update a game
+// Update a console
 export const updateConsole = createAsyncThunk(
   "Consoles/update",
-  async ({ id, ...gameData }, { dispatch, getState }) => {
+  async ({ id, ...consoleData }, { dispatch, getState }) => {
     try {
-      // No need for nameLower field, just update name and image as they are
-      const updatedData = {
-        ...gameData,
-        name: gameData.name,
-        image: gameData.image,
-      };
+      // Get original console data for updating new_console collection
+      const consoleRef = doc(db, "console", id);
+      const consoleSnapshot = await getDoc(consoleRef);
+      const originalConsole = consoleSnapshot.data();
+      let updatedConsoleData;
 
-      const gameRef = doc(db, "console", id);
-      await updateDoc(gameRef, updatedData);
+      // Check if name is changing
+      if (originalConsole && originalConsole.name !== consoleData.name) {
+        // Create a new document with the new name as ID
+        const newDocId = consoleData.name;
+        const newConsoleData = {
+          id: newDocId,
+          name: consoleData.name,
+          image: consoleData.image,
+        };
+
+        // Create new document with new ID
+        await setDoc(doc(db, "console", newDocId), newConsoleData);
+
+        // Delete old document
+        await deleteDoc(consoleRef);
+
+        updatedConsoleData = newConsoleData;
+      } else {
+        // Just update the existing document (name didn't change)
+        const updatedData = {
+          id: id, // Keep the existing ID
+          name: consoleData.name,
+          image: consoleData.image,
+        };
+
+        await updateDoc(consoleRef, updatedData);
+        updatedConsoleData = { id, ...updatedData };
+      }
+
+      // Update in new_console collection - find by original name and update to new name
+      if (originalConsole && originalConsole.name) {
+        // Find the document in new_console with the original name
+        const newConsoleQuery = query(
+          collection(db, "new_consoles"),
+          where("name", "==", originalConsole.name)
+        );
+
+        const querySnapshot = await getDocs(newConsoleQuery);
+
+        // Update all matching documents with the new name
+        querySnapshot.forEach(async (doc) => {
+          await updateDoc(doc.ref, { name: consoleData.name });
+        });
+      }
 
       // Clear cache for the affected pages
       Object.keys(pageCache).forEach((key) => delete pageCache[key]);
@@ -309,14 +380,13 @@ export const updateConsole = createAsyncThunk(
         dispatch(fetchConsoles({ page: currentPage, limit: gamesPerPage }));
       }
 
-      return { id, ...updatedData };
+      return updatedConsoleData;
     } catch (error) {
       console.error("Error updating console:", error);
       throw error;
     }
   }
 );
-
 const consoleSlice = createSlice({
   name: "Consoles",
   initialState: {

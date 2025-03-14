@@ -8,6 +8,7 @@ import FAQsection from "../components/FAQSection";
 import Fonctionnalites from "../components/Fonctionnalites";
 import Caracteristiques from "../components/Caracteristiques";
 import Form from "../components/Form";
+import FAQ from "@/components/FAQ";
 
 const LandingPage = () => {
   const location = useLocation();
@@ -39,6 +40,7 @@ const LandingPage = () => {
         <Caracteristiques />
         <Fonctionnalites />
         <Form />
+        <FAQ />
         <section id="faq">
           <FAQsection />
         </section>

@@ -33,7 +33,7 @@ export default function Consoles() {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [currentGame, setCurrentGame] = useState(null);
+  const [currentConsole, setcurrentConsole] = useState(null);
   const [isMounted, setIsMounted] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -43,7 +43,7 @@ export default function Consoles() {
     return () => setIsMounted(false); // Cleanup when component is unmounted
   }, []);
 
-  // Fetch total game count initially (only when not done yet)
+  // Fetch total console count initially (only when not done yet)
   useEffect(() => {
     if (isMounted && !initialFetchDone) {
       dispatch(fetchTotalConsolesCount());
@@ -99,7 +99,9 @@ export default function Consoles() {
         });
       } else {
         // Perform search if there is a value
-        dispatch(searchConsoles({ query: value, page: 1, limit: consolesPerPage }));
+        dispatch(
+          searchConsoles({ query: value, page: 1, limit: consolesPerPage })
+        );
         // The totalPages will be set in the reducer based on the search results
       }
     }, 500);
@@ -117,11 +119,11 @@ export default function Consoles() {
         accessorKey: "image",
         header: "Image",
         cell: ({ row }) => {
-          const game = row;
+          const console = row;
           return (
             <Button asChild variant="outline">
               <a
-                href={game?.image || "#"}
+                href={console?.image || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:bg-gray-300 hover:text-black hover:border-zinc-700 text-zinc-950 border rounded-xl"
@@ -132,11 +134,10 @@ export default function Consoles() {
             </Button>
 
             /* <img
-            src={game.image}
-            alt="Game Image"
+            src={console.image}
+            alt="console Image"
             className="w-16 h-16 object-cover rounded-lg"
             /> */
-
           );
         },
       },
@@ -144,13 +145,13 @@ export default function Consoles() {
         id: "actions",
         header: "Actions",
         cell: ({ row }) => {
-          const game = row;
+          const console = row;
           return (
             <div className="flex items-center gap-2">
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => handleEdit(game)}
+                onClick={() => handleEdit(console)}
                 className="hover:text-gray-400"
               >
                 <Edit className="h-4 w-4" />
@@ -158,7 +159,7 @@ export default function Consoles() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => handleDelete(game)}
+                onClick={() => handleDelete(console)}
                 className="hover:text-red-600 "
               >
                 <Trash2 className="h-4 w-4" />
@@ -172,35 +173,36 @@ export default function Consoles() {
   );
 
   const handleAdd = () => {
-    setCurrentGame(null);
+    setcurrentConsole(null);
     setIsFormOpen(true);
   };
 
-  const handleEdit = (game) => {
-    setCurrentGame(game);
+  const handleEdit = (console) => {
+    setcurrentConsole(console);
+
     setIsFormOpen(true);
   };
 
-  const handleDelete = (game) => {
-    setCurrentGame(game);
+  const handleDelete = (console) => {
+    setcurrentConsole(console);
     setIsDeleteOpen(true);
   };
 
-  const handleSave = async (gameData) => {
-    if (currentGame) {
-      // Dispatch updateConsole with the current game id and new data
-      await dispatch(updateConsole({ id: currentGame.id, ...gameData }));
+  const handleSave = async (consoleData) => {
+    if (currentConsole) {
+      // Dispatch updateConsole with the current console id and new data
+      await dispatch(updateConsole({ id: currentConsole.id, ...consoleData }));
     } else {
-      // Dispatch addConsole to add a new game
-      await dispatch(addConsole(gameData));
+      // Dispatch addConsole to add a new console
+      await dispatch(addConsole(consoleData));
     }
     setIsFormOpen(false);
   };
 
   const handleConfirmDelete = async () => {
-    if (currentGame) {
-      // Dispatch deleteConsole with the current game id
-      await dispatch(deleteConsole(currentGame.id));
+    if (currentConsole) {
+      // Dispatch deleteConsole with the current console id
+      await dispatch(deleteConsole(currentConsole.id));
       setIsDeleteOpen(false);
     }
   };
@@ -231,7 +233,7 @@ export default function Consoles() {
       />
 
       <ConsoleForm
-        game={currentGame}
+        console={currentConsole}
         isOpen={isFormOpen}
         onClose={() => setIsFormOpen(false)}
         onSave={handleSave}
@@ -242,8 +244,9 @@ export default function Consoles() {
         onClose={() => setIsDeleteOpen(false)}
         onConfirm={handleConfirmDelete}
         title="Delete Console"
-        description={`Are you sure you want to delete ${currentGame?.name || "this game"
-          }? This action cannot be undone.`}
+        description={`Are you sure you want to delete ${
+          currentConsole?.name || "this console"
+        }? This action cannot be undone.`}
       />
 
       <div className="mt-4 flex justify-between items-center">
