@@ -10,11 +10,21 @@ import {
 import { Button } from "@/components/ui/button";
 import header_icon from "@/assets/icons/header_icon.png";
 import User from "@/assets/animoji.png";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "@/features/authSlice";
 
 const Sidebar = ({ setActivePage }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user);
 
   const handleLogout = () => {
+    // Dispatch logout to clear user data from the global state
+    dispatch(logout());
+
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("role");
     localStorage.removeItem("isAuthenticated");
     navigate("/login");
   };
@@ -28,7 +38,7 @@ const Sidebar = ({ setActivePage }) => {
   ];
 
   return (
-    <div className="flex flex-col h-screen w-80 bg-zinc-950 border-r border-white border-opacity-10 text-white shadow-xl p-4">
+    <div className="flex flex-col h-100% w-80 bg-zinc-950 border-r border-white border-opacity-10 text-white shadow-xl p-4">
       <div className="p-6 flex items-center justify-center">
         <img
           src={header_icon || "/placeholder.svg"}
@@ -65,7 +75,9 @@ const Sidebar = ({ setActivePage }) => {
           className="w-16 h-16 mr-2 rounded-full "
         />
         <div className="flex flex-col">
-          <p className="text-sm font-medium">admin@admin.com</p>
+          <p className="text-sm font-medium">
+            {user ? `Hello, ${user.email}` : "User not logged in"}
+          </p>
           <span className="text-xs text-gray-400">Administrateur</span>
         </div>
       </div>

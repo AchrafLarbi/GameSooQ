@@ -1,4 +1,4 @@
-import acceuil_bg from "../assets/background/Gaming2.jpg";
+import acceuil_bg from "../assets/background/Gaming2_op.webp";
 import AcceuilPageMiddle from "./AcceuilPageMiddle";
 
 const AcceuilPage = () => {

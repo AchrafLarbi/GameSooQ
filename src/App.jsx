@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Aide from "./pages/Aide";
-import FAQSection  from "./components/FAQSection";
+import FAQSection from "./components/FAQSection";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import Login from "./Dashboard/pages/Login";
 import Admin from "./Dashboard/Admin";
@@ -11,9 +11,25 @@ import Games from "./Dashboard/pages/Games";
 import Consoles from "./Dashboard/pages/Consoles";
 import Posts from "./Dashboard/pages/Posts";
 import ProtectedRoute from "./Dashboard/ProtectedRoute";
-import { SAMLAuthProvider } from "firebase/auth";
+import RegisterAdmin from "./pages/RegisterAdmin";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "./features/authSlice";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+    const role = localStorage.getItem("role");
+    const user = isAuthenticated
+      ? { email: localStorage.getItem("email") }
+      : null;
+
+    if (isAuthenticated && user) {
+      dispatch(loginSuccess({ user, role }));
+    }
+  }, [dispatch]);
   return (
     <Router>
       <Routes>
@@ -31,7 +47,17 @@ const App = () => {
 
         <Route path="/login" element={<Login />} />
 
-        <Route path="/operation" element={<ProtectedRoute />}>
+        <Route
+          path="/register-admin"
+          element={<ProtectedRoute allowedRoles={["super_admin"]} />}
+        >
+          <Route path="" element={<RegisterAdmin />} />
+        </Route>
+
+        <Route
+          path="/operation"
+          element={<ProtectedRoute allowedRoles={["super_admin", "admin"]} />}
+        >
           <Route path="" element={<Admin />}>
             <Route path="home" element={<Dashboard />} />
             <Route path="users" element={<Users />} />
