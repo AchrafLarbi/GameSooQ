@@ -59,7 +59,7 @@ const FeaturesSection = () => {
   return (
     <section
       id="fonctionnalites"
-      className="min-h-screen py-16 relative overflow-hidden"
+      className="min-h-screen py-16 relative overflow-hidden "
     >
       {/* Background stars */}
 
@@ -129,7 +129,7 @@ const FeaturesSection = () => {
                       <Motion.img
                         src={feature.img || "/placeholder.svg"}
                         alt="GameSooq Mobile App Interface"
-                        className="w-5/12 xl:w-7/12 max-w-md mx-auto "
+                        className="w-5/12 xl:w-7/12 ultrawide:w-12/12 max-w-md mx-auto "
                         initial={{ scale: 0.95, rotate: -2 }}
                         animate={{
                           scale: 1,

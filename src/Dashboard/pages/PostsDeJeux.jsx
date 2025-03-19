@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { Edit, Trash2, X, ArrowRight, ArrowLeft } from "lucide-react";
+import {
+  SquareArrowOutUpRight,
+  Trash2,
+  X,
+  ArrowRight,
+  ArrowLeft,
+} from "lucide-react";
 import { DataTable } from "@/Dashboard/components/Table";
 import { Button } from "@/components/ui/button";
 import { DeleteConfirmation } from "@/Dashboard/components/delete-confirmation";
@@ -19,6 +25,7 @@ import {
   setFilterApplied,
   setTotalPages,
 } from "@/features/gamePostSlice";
+import GameDetailsOverlay from "../components/GameDetailsOverlay";
 
 export default function GamePostsPage() {
   const dispatch = useDispatch();
@@ -157,7 +164,7 @@ export default function GamePostsPage() {
       },
       {
         accessorKey: "transaction_details",
-        header: "Price",
+        header: "Price/Game",
         cell: ({ row }) => {
           const price = row.transaction_details;
 
@@ -181,7 +188,7 @@ export default function GamePostsPage() {
                 onClick={() => handleGameClick(gamePost)}
                 className="hover:text-gray-400"
               >
-                <Edit className="h-4 w-4" />
+                <SquareArrowOutUpRight className="h-4 w-4" />
               </Button>
               <Button
                 variant="ghost"
@@ -255,126 +262,10 @@ export default function GamePostsPage() {
 
       {/* Game Detail Overlay */}
       {overlayOpen && selectedGame && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-          <div className="relative w-full max-w-4xl">
-            {/* Close button */}
-            <button
-              onClick={handleCloseOverlay}
-              className="absolute top-2 right-2 text-white hover:text-gray-300"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <div className="p-4">
-              {/* Game title */}
-              <h1 className="text-4xl font-bold text-white mb-8">
-                {selectedGame.gameName}
-              </h1>
-
-              {/* Image gallery */}
-              <div className="w-full h-64 mb-8 bg-gray-800 flex items-center justify-center">
-                {selectedGame.images && selectedGame.images.length > 0 ? (
-                  <img
-                    src={selectedGame.images[0]}
-                    alt={selectedGame.gameName}
-                    className="h-full object-contain"
-                  />
-                ) : (
-                  <span className="text-gray-400">No Image Available</span>
-                )}
-              </div>
-
-              {/* Navigation indicators */}
-              <div className="flex justify-between mb-6">
-                <button className="rounded-full bg-gray-700 p-2 hover:bg-gray-600">
-                  <ArrowLeft className="w-6 h-6 text-white" />
-                </button>
-                <div className="flex gap-2">
-                  {selectedGame.images &&
-                    selectedGame.images.map((_, index) => (
-                      <span
-                        key={index}
-                        className={`h-2 w-2 rounded-full ${
-                          index === 0 ? "bg-white" : "bg-gray-500"
-                        }`}
-                      />
-                    ))}
-                  {(!selectedGame.images ||
-                    selectedGame.images.length === 0) && (
-                    <span className="h-2 w-2 rounded-full bg-white" />
-                  )}
-                </div>
-                <button className="rounded-full bg-gray-700 p-2 hover:bg-gray-600">
-                  <ArrowRight className="w-6 h-6 text-white" />
-                </button>
-              </div>
-
-              {/* Labels */}
-              <div className="flex gap-4 mb-6">
-                <div className="bg-purple-700 text-white py-2 px-4 rounded-full">
-                  For Sale
-                </div>
-                <div className="bg-purple-700 text-white py-2 px-4 rounded-full">
-                  {selectedGame.platform}
-                </div>
-              </div>
-
-              {/* Date */}
-              <div className="flex items-center text-white mb-4">
-                <span className="text-lg">{selectedGame.createdAt}</span>
-              </div>
-
-              {/* User info and metadata */}
-              <div className="grid grid-cols-2 gap-4 border-b border-gray-700 pb-6 mb-6">
-                <div className="flex items-center text-white">
-                  <span className="mr-2">👤</span>
-                  <span>{selectedGame.sellerName}</span>
-                </div>
-                <div className="flex items-center text-white">
-                  <span className="mr-2">🏷️</span>
-                  <span>ID: {selectedGame.id}</span>
-                </div>
-                <div className="flex items-center text-white">
-                  <span className="mr-2">📍</span>
-                  <span>{selectedGame.location}</span>
-                </div>
-                <div className="flex items-center text-white">
-                  <span className="mr-2">🚚</span>
-                  <span>
-                    {selectedGame.deliveryAvailable
-                      ? "Delivery Available"
-                      : "No Delivery"}
-                  </span>
-                </div>
-              </div>
-
-              {/* Description */}
-              <div className="bg-gray-800 rounded-lg p-6 mb-8">
-                <p className="text-white">{selectedGame.description}</p>
-              </div>
-
-              {/* Price */}
-              <div className="flex justify-between items-center">
-                <h2 className="text-white text-3xl font-bold">Price</h2>
-                <div className="text-right">
-                  <span className="text-white text-3xl font-bold">
-                    {selectedGame.price}
-                  </span>
-                  <span className="text-purple-500 text-3xl font-bold ml-2">
-                    DA
-                  </span>
-                </div>
-              </div>
-
-              {/* Condition badge */}
-              <div className="mt-6 text-right">
-                <span className="border border-purple-500 text-purple-400 rounded-full py-2 px-4 inline-block">
-                  {selectedGame.condition}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <GameDetailsOverlay
+          selectedGame={selectedGame}
+          onClose={handleCloseOverlay}
+        />
       )}
     </div>
   );
