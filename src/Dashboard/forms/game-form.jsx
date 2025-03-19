@@ -15,7 +15,6 @@ import { Label } from "@/components/ui/label";
 export function GameForm({ game, isOpen, onClose, onSave }) {
   const [formData, setFormData] = useState({
     name: "",
-    image: "",
   });
 
   useEffect(() => {
@@ -24,7 +23,6 @@ export function GameForm({ game, isOpen, onClose, onSave }) {
     } else {
       setFormData({
         name: "",
-        image: "",
       }); // Reset form data when adding a new game
     }
   }, [game, isOpen]);
@@ -44,7 +42,7 @@ export function GameForm({ game, isOpen, onClose, onSave }) {
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>
-            {game ? "Modifier Un Jeu" : "Ajouter Un Jeu"}
+            {game ? "Modifier  un  Jeu" : "Ajouter  un  Jeu"}
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
@@ -58,26 +56,17 @@ export function GameForm({ game, isOpen, onClose, onSave }) {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="col-span-3"
-                required
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="image" className="text-right">
-                URL de Image
-              </Label>
-              <Input
-                id="image"
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-                className="col-span-3"
+                className="col-span-3 border border-zinc-800 focus:border-zinc-700 text-white  rounded-xl"
                 required
               />
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" variant="outline">
+            <Button
+              type="submit"
+              variant="outline"
+              className="border border-zinc-950 hover:text-black rounded-xl hover:bg-zinc-300"
+            >
               Enregistrer
             </Button>
           </DialogFooter>

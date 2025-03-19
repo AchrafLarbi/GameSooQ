@@ -114,26 +114,6 @@ export default function GamesPage() {
         header: "Name",
       },
       {
-        accessorKey: "image",
-        header: "Image",
-        cell: ({ row }) => {
-          const game = row;
-          return (
-            <Button asChild variant="outline">
-              <a
-                href={game?.image || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:bg-gray-300 hover:text-black hover:border-zinc-700 text-zinc-950 border rounded-xl"
-              >
-                <Image className="w-5 h-5" />
-                View Image
-              </a>
-            </Button>
-          );
-        },
-      },
-      {
         id: "actions",
         header: "Actions",
         cell: ({ row }) => {
@@ -235,8 +215,9 @@ export default function GamesPage() {
         onClose={() => setIsDeleteOpen(false)}
         onConfirm={handleConfirmDelete}
         title="Delete Game"
-        description={`Are you sure you want to delete ${currentGame?.name || "this game"
-          }? This action cannot be undone.`}
+        description={`Are you sure you want to delete ${
+          currentGame?.name || "this game"
+        }? This action cannot be undone.`}
       />
 
       <div className="mt-4 flex justify-between items-center">

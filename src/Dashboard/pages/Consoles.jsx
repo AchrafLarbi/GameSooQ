@@ -116,32 +116,6 @@ export default function Consoles() {
         header: "Name",
       },
       {
-        accessorKey: "image",
-        header: "Image",
-        cell: ({ row }) => {
-          const console = row;
-          return (
-            <Button asChild variant="outline">
-              <a
-                href={console?.image || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:bg-gray-300 hover:text-black hover:border-zinc-700 text-zinc-950 border rounded-xl"
-              >
-                <Image className="w-5 h-5" />
-                View Image
-              </a>
-            </Button>
-
-            /* <img
-            src={console.image}
-            alt="console Image"
-            className="w-16 h-16 object-cover rounded-lg"
-            /> */
-          );
-        },
-      },
-      {
         id: "actions",
         header: "Actions",
         cell: ({ row }) => {

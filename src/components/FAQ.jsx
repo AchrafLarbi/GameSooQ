@@ -42,7 +42,7 @@ export default function FAQ() {
     <section id="faq" className="text-white py-10 px-4 md:px-8 lg:px-16">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8">
-          <h3 className="text-[#FF5555] text-2xl uppercase tracking-wider font-medium">
+          <h3 className="text-[#FF5555] text-sm uppercase tracking-wider font-medium">
             FAQ
           </h3>
           <h2 className="text-2xl md:text-3xl font-bold uppercase tracking-wide">
@@ -54,7 +54,7 @@ export default function FAQ() {
           {faqItems.map((item, index) => (
             <div
               key={index}
-              className={`p-6 rounded-lg ${
+              className={`p-6 rounded-xl ${
                 item.isRed
                   ? "bg-[#FF5555]"
                   : "sm:bg-[#FF5555] lg:bg-transparent md:bg-transparent bg-[#FF5555] "

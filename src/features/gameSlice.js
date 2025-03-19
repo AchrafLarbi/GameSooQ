@@ -201,7 +201,6 @@ export const addGame = createAsyncThunk(
       // Data for main Games collection
       const gameData = {
         name: game.name,
-        image: game.image,
       };
 
       // Add to main Games collection
@@ -313,7 +312,6 @@ export const updateGame = createAsyncThunk(
       const updatedData = {
         ...gameData,
         name: gameData.name,
-        image: gameData.image,
       };
 
       const gameRef = doc(db, "Games", id);

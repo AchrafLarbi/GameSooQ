@@ -206,7 +206,6 @@ export const addConsole = createAsyncThunk(
       const consoleData = {
         id: docId,
         name: console.name,
-        image: console.image,
       };
 
       // Use setDoc to create document with specific ID in main console collection
@@ -324,7 +323,6 @@ export const updateConsole = createAsyncThunk(
         const newConsoleData = {
           id: newDocId,
           name: consoleData.name,
-          image: consoleData.image,
         };
 
         // Create new document with new ID
@@ -339,7 +337,6 @@ export const updateConsole = createAsyncThunk(
         const updatedData = {
           id: id, // Keep the existing ID
           name: consoleData.name,
-          image: consoleData.image,
         };
 
         await updateDoc(consoleRef, updatedData);

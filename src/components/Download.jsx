@@ -17,7 +17,7 @@ export default function Download() {
           alt="Prêt à commencer?"
         />
 
-        <div className="absolute w-full h-full flex flex-col items-center  justify-center text-white text-center sm:text-left sm:px-10 ">
+        <div className="absolute w-full h-full flex flex-col items-center  justify-center text-white text-center sm:text-left sm:px-10 lg:mr-40 ">
           <h2 className="text-sm sm:text-3xl md:text-5xl font-extrabold sm:mb-3 ">
             Prêt à commencer ?
           </h2>
@@ -25,12 +25,12 @@ export default function Download() {
             Téléchargez l’application dès maintenant...
           </p>
 
-          <div className="flex flex-col md:flex-row sm:flex-col gap-4  justify-center sm:justify-start ">
+          <div className="flex flex-row gap-4 justify-center sm:justify-start mt-5">
             <a
               href="https://play.google.com/store"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-20 sm:w-auto"
+              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
             >
               <img
                 src={PlayStore}
@@ -39,18 +39,16 @@ export default function Download() {
               />
             </a>
 
-            <a
-              href="https://apps.apple.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg w-20 sm:w-auto"
-            >
+            <div className="flex flex-col items-center">
               <img
                 src={AppStore}
-                className="w-36 sm:w-44 md:w-48 h-auto"
+                className="w-36 sm:w-44 md:w-48 h-auto opacity-50"
                 alt="Download on the App Store"
               />
-            </a>
+              <p className="text-[13px] hidden sm:block opacity-80 font-medium my-3">
+                Disponible prochainement
+              </p>
+            </div>
           </div>
         </div>
       </div>
