@@ -30,10 +30,18 @@ export function DeleteConfirmation({
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button variant="outline" onClick={onClose}>
+          <Button
+            variant="outline"
+            onClick={onClose}
+            className="border border-zinc-950 hover:text-black rounded-xl hover:bg-zinc-300 "
+          >
             Annuler
           </Button>
-          <Button variant="destructive" onClick={handleConfirm}>
+          <Button
+            variant="destructive"
+            onClick={handleConfirm}
+            className="border border-zinc-950 bg-red-500  hover:text-white rounded-xl hover:bg-red-700"
+          >
             Supprimer
           </Button>
         </DialogFooter>
