@@ -33,8 +33,9 @@ const Sidebar = ({ setActivePage }) => {
     { path: "home", label: "Tableau de Bord", icon: LayoutDashboard },
     { path: "users", label: "Utilisateurs", icon: Users },
     { path: "games", label: "Jeux", icon: Gamepad2 },
+    { path: "postsdejeux", label: "Posts de jeux", icon: FileText },
     { path: "consoles", label: "Consoles", icon: MonitorPlay },
-    { path: "posts", label: "Posts", icon: FileText },
+    { path: "postsdeconsoles", label: "Posts de consoles", icon: FileText },
   ];
 
   return (

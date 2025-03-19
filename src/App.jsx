@@ -9,7 +9,8 @@ import Dashboard from "./Dashboard/pages/Dashboard";
 import Users from "./Dashboard/pages/Users";
 import Games from "./Dashboard/pages/Games";
 import Consoles from "./Dashboard/pages/Consoles";
-import Posts from "./Dashboard/pages/Posts";
+import Posts from "./Dashboard/pages/PostsDeJeux";
+import Posts2 from "./Dashboard/pages/PostsDeConsoles";
 import ProtectedRoute from "./Dashboard/ProtectedRoute";
 import RegisterAdmin from "./pages/RegisterAdmin";
 import { useEffect } from "react";
@@ -63,7 +64,8 @@ const App = () => {
             <Route path="users" element={<Users />} />
             <Route path="games" element={<Games />} />
             <Route path="consoles" element={<Consoles />} />
-            <Route path="posts" element={<Posts />} />
+            <Route path="postsdejeux" element={<Posts />} />
+            <Route path="postsdeconsoles" element={<Posts2 />} />
             <Route path="*" element={<Dashboard />} />
           </Route>
         </Route>

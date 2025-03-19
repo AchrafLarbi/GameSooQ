@@ -12,7 +12,8 @@ const Admin = () => {
       "/operation/users": "Utilisateurs",
       "/operation/games": "Jeux",
       "/operation/consoles": "Consoles",
-      "/operation/posts": "Posts",
+      "/operation/postsdejeux": "Posts de jeux",
+      "/operation/postsdeconsoles": "Posts de consoles",
     };
     setActivePage(pathToPage[location.pathname] || "Tableau de Bord");
   }, [location.pathname]);
