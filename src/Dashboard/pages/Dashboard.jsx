@@ -34,7 +34,7 @@ const Dashboard = () => {
           getCountFromServer(collection(db, "console_posts")),
           getCountFromServer(collection(db, "console")),
           getCountFromServer(collection(db, "Games")),
-          getCountFromServer(collection(db, "new_console")),
+          getCountFromServer(collection(db, "new_consoles")),
           getCountFromServer(collection(db, "new_games")),
         ]);
 
@@ -46,10 +46,10 @@ const Dashboard = () => {
           Consoleposts: consolePostsCount.data().count,
           newConsoles: newConsolesCount.data().count,
           newGames: newGamesCount.data().count,
-          AllConsoles: consolesCount.data().count,
-          // + newConsolesCount.data().count,
-          AllGames: gamesCount.data().count,
-          // + newGamesCount.data().count,
+
+          AllConsoles:
+            consolesCount.data().count + newConsolesCount.data().count,
+          AllGames: gamesCount.data().count + newGamesCount.data().count,
         });
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -58,6 +58,7 @@ const Dashboard = () => {
 
     fetchCounts();
   }, []);
+  console.log(stats);
 
   return (
     <div className="flex-1 p-6">

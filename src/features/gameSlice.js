@@ -10,7 +10,6 @@ import {
   updateDoc,
   query,
   limit,
-  startAfter,
   orderBy,
   where,
   getCountFromServer,
@@ -24,56 +23,116 @@ export const fetchGames = createAsyncThunk(
   "Games/fetch",
   async ({ page = 1, limit: pageLimit = 5 }, { dispatch }) => {
     try {
+      // Define both collection references
       const gamesRef = collection(db, "Games");
-      let q;
+      const newGamesRef = collection(db, "new_games");
 
-      // If we have a cached reference for this page, use it for efficient pagination
-      if (page > 1 && pageCache[page - 1]) {
-        q = query(
+      // We'll need to handle pagination differently for combined collections
+      if (page === 1 || !pageCache[page - 1]) {
+        // For first page or cache miss, we'll need to query both collections and merge
+        const gamesQuery = query(
           gamesRef,
           orderBy("name"),
-          startAfter(pageCache[page - 1]),
-          limit(pageLimit)
-        );
-      } else if (page === 1) {
-        // First page is simple
-        q = query(gamesRef, orderBy("name"), limit(pageLimit));
-      } else {
-        // Fallback for uncached pages (should be rare)
-        console.warn(`Page ${page} not in cache, fetching from beginning`);
-        q = query(gamesRef, orderBy("name"), limit(page * pageLimit));
-        const snapshot = await getDocs(q);
-        if (snapshot.empty) return [];
+          limit(pageLimit * 2)
+        ); // Get extra to merge
+        const newGamesQuery = query(
+          newGamesRef,
+          orderBy("name"),
+          limit(pageLimit * 2)
+        ); // Get extra to merge
 
-        // Get just the last batch
-        const allDocs = snapshot.docs;
-        const startIndex = (page - 1) * pageLimit;
+        // Execute both queries in parallel
+        const [gamesSnapshot, newGamesSnapshot] = await Promise.all([
+          getDocs(gamesQuery),
+          getDocs(newGamesQuery),
+        ]);
 
-        // Cache documents for future use
-        for (let i = 0; i < Math.min(page, allDocs.length / pageLimit); i++) {
-          const cacheIndex = i * pageLimit + pageLimit - 1;
-          if (cacheIndex < allDocs.length) {
-            pageCache[i + 1] = allDocs[cacheIndex];
-          }
+        // Combine and sort results from both collections
+        const allGames = [
+          ...gamesSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            source: "Games",
+            ...doc.data(),
+          })),
+          ...newGamesSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            source: "new_games",
+            ...doc.data(),
+          })),
+        ].sort((a, b) => a.name.localeCompare(b.name));
+
+        // Take only what we need for this page
+        const currentPageGames = allGames.slice(0, pageLimit);
+
+        // Cache the last item for pagination
+        if (currentPageGames.length > 0) {
+          const lastGame = currentPageGames[currentPageGames.length - 1];
+          pageCache[page] = {
+            name: lastGame.name,
+            source: lastGame.source,
+          };
         }
 
-        // Return only the current page
-        return allDocs
-          .slice(startIndex, startIndex + pageLimit)
-          .map((doc) => ({ id: doc.id, ...doc.data() }));
+        // Reset the filter flag when fetching all games
+        dispatch(setFilterApplied(false));
+
+        return currentPageGames;
+      } else {
+        // For subsequent pages, use the cached reference point
+        const lastCached = pageCache[page - 1];
+
+        // Query both collections but start after our last cached item
+        const gamesQuery = query(
+          gamesRef,
+          orderBy("name"),
+          where("name", ">", lastCached.name),
+          limit(pageLimit * 2)
+        );
+
+        const newGamesQuery = query(
+          newGamesRef,
+          orderBy("name"),
+          where("name", ">", lastCached.name),
+          limit(pageLimit * 2)
+        );
+
+        // Execute both queries in parallel
+        const [gamesSnapshot, newGamesSnapshot] = await Promise.all([
+          getDocs(gamesQuery),
+          getDocs(newGamesQuery),
+        ]);
+
+        // Combine and sort results from both collections
+        const allGames = [
+          ...gamesSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            source: "Games",
+            ...doc.data(),
+          })),
+          ...newGamesSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            source: "new_games",
+            ...doc.data(),
+          })),
+        ].sort((a, b) => a.name.localeCompare(b.name));
+
+        // Take only what we need for this page
+        const currentPageGames = allGames.slice(0, pageLimit);
+
+        // Cache the last item for pagination
+        if (currentPageGames.length > 0) {
+          const lastGame = currentPageGames[currentPageGames.length - 1];
+          pageCache[page] = {
+            name: lastGame.name,
+            source: lastGame.source,
+          };
+        }
+
+        // Reset the filter flag when fetching all games
+        dispatch(setFilterApplied(false));
+
+        return currentPageGames;
       }
-
-      const snapshot = await getDocs(q);
-
-      // Cache the last document for pagination
-      if (snapshot.docs.length > 0) {
-        pageCache[page] = snapshot.docs[snapshot.docs.length - 1];
-      }
-
-      // Reset the filter flag when fetching all games
-      dispatch(setFilterApplied(false));
-
-      return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     } catch (error) {
       console.error("Error fetching games:", error);
       throw error;
@@ -81,11 +140,11 @@ export const fetchGames = createAsyncThunk(
   }
 );
 
-// Optimized search functionality
+// Optimized search functionality across both collections
 export const searchGames = createAsyncThunk(
   "Games/search",
   async (
-    { query: searchQuery, page = 1, limit: pageLimit = 10 },
+    { query: searchQuery, page = 1, limit: pageLimit = 5 },
     { dispatch }
   ) => {
     try {
@@ -96,52 +155,105 @@ export const searchGames = createAsyncThunk(
       }
 
       const gamesRef = collection(db, "Games");
+      const newGamesRef = collection(db, "new_games");
       const normalizedQuery = searchQuery.toLowerCase();
-      let q;
 
-      // First page or no cache
-      if (page === 1 || !pageCache[`search_${normalizedQuery}_${page - 1}`]) {
-        q = query(
+      // Create queries for both collections
+      let gamesQuery = query(
+        gamesRef,
+        where("name", ">=", searchQuery),
+        where("name", "<=", searchQuery + "\uf8ff"),
+        orderBy("name"),
+        limit(pageLimit * 2) // Get extra to merge
+      );
+
+      let newGamesQuery = query(
+        newGamesRef,
+        where("name", ">=", searchQuery),
+        where("name", "<=", searchQuery + "\uf8ff"),
+        orderBy("name"),
+        limit(pageLimit * 2) // Get extra to merge
+      );
+
+      // If this is a paginated search and we have cache, adjust the queries
+      if (page > 1 && pageCache[`search_${normalizedQuery}_${page - 1}`]) {
+        const lastCached = pageCache[`search_${normalizedQuery}_${page - 1}`];
+
+        // Update queries with pagination constraints
+        gamesQuery = query(
           gamesRef,
           where("name", ">=", searchQuery),
           where("name", "<=", searchQuery + "\uf8ff"),
           orderBy("name"),
-          limit(pageLimit)
+          where("name", ">", lastCached.name),
+          limit(pageLimit * 2)
         );
-      } else {
-        // For subsequent pages, use the startAfter with the cached document
-        const lastDoc = pageCache[`search_${normalizedQuery}_${page - 1}`];
-        q = query(
-          gamesRef,
+
+        newGamesQuery = query(
+          newGamesRef,
           where("name", ">=", searchQuery),
           where("name", "<=", searchQuery + "\uf8ff"),
           orderBy("name"),
-          startAfter(lastDoc),
-          limit(pageLimit)
+          where("name", ">", lastCached.name),
+          limit(pageLimit * 2)
         );
       }
 
-      const snapshot = await getDocs(q);
+      // Execute both queries in parallel
+      const [gamesSnapshot, newGamesSnapshot] = await Promise.all([
+        getDocs(gamesQuery),
+        getDocs(newGamesQuery),
+      ]);
 
-      // Cache the last document for pagination
-      if (snapshot.docs.length > 0) {
-        pageCache[`search_${normalizedQuery}_${page}`] =
-          snapshot.docs[snapshot.docs.length - 1];
+      // Combine and sort results from both collections
+      const allGames = [
+        ...gamesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          source: "Games",
+          ...doc.data(),
+        })),
+        ...newGamesSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          source: "new_games",
+          ...doc.data(),
+        })),
+      ].sort((a, b) => a.name.localeCompare(b.name));
+
+      // Take only what we need for this page
+      const currentPageGames = allGames.slice(0, pageLimit);
+
+      // Cache the last item for pagination
+      if (currentPageGames.length > 0) {
+        const lastGame = currentPageGames[currentPageGames.length - 1];
+        pageCache[`search_${normalizedQuery}_${page}`] = {
+          name: lastGame.name,
+          source: lastGame.source,
+        };
       }
 
       // Set flags in state
       dispatch(setFilterApplied(true));
       dispatch(setSearchQuery(searchQuery));
 
-      // Update total count for search results
-      const countQuery = query(
+      // Calculate total count for both collections combined
+      const gamesCountQuery = query(
         gamesRef,
         where("name", ">=", searchQuery),
         where("name", "<=", searchQuery + "\uf8ff")
       );
 
-      const countSnapshot = await getCountFromServer(countQuery);
-      const total = countSnapshot.data().count;
+      const newGamesCountQuery = query(
+        newGamesRef,
+        where("name", ">=", searchQuery),
+        where("name", "<=", searchQuery + "\uf8ff")
+      );
+
+      const [gamesCount, newGamesCount] = await Promise.all([
+        getCountFromServer(gamesCountQuery),
+        getCountFromServer(newGamesCountQuery),
+      ]);
+
+      const total = gamesCount.data().count + newGamesCount.data().count;
 
       // Calculate total pages
       const totalPages = Math.ceil(total / pageLimit);
@@ -149,7 +261,7 @@ export const searchGames = createAsyncThunk(
 
       // Return both the data and the total for easier state updates
       return {
-        items: snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })),
+        items: currentPageGames,
         total,
       };
     } catch (error) {
@@ -168,7 +280,7 @@ function clearSearchCache() {
   });
 }
 
-// Fetch the total count using the more efficient getCountFromServer
+// Fetch the total count from both collections
 export const fetchTotalGamesCount = createAsyncThunk(
   "Games/fetchTotalCount",
   async (_, { getState }) => {
@@ -177,9 +289,17 @@ export const fetchTotalGamesCount = createAsyncThunk(
       // Use cached value if available
       if (initialFetchDone) return getState().games.totalGames;
 
-      const coll = collection(db, "Games");
-      const snapshot = await getCountFromServer(coll);
-      return snapshot.data().count;
+      const gamesRef = collection(db, "Games");
+      const newGamesRef = collection(db, "new_games");
+
+      // Get counts from both collections
+      const [gamesCount, newGamesCount] = await Promise.all([
+        getCountFromServer(gamesRef),
+        getCountFromServer(newGamesRef),
+      ]);
+
+      // Return sum of both counts
+      return gamesCount.data().count + newGamesCount.data().count;
     } catch (error) {
       console.error("Error fetching game count:", error);
       throw error;
@@ -192,23 +312,19 @@ export const fetchTotalGamesCount = createAsyncThunk(
     },
   }
 );
-
 // Add a new game
 export const addGame = createAsyncThunk(
   "Games/add",
   async (game, { dispatch, getState }) => {
     try {
-      // Data for main Games collection
+      // Add only to new_games collection
       const gameData = {
         name: game.name,
       };
 
-      // Add to main Games collection
-      const docRef = await addDoc(collection(db, "Games"), gameData);
-      const newGame = { id: docRef.id, ...gameData };
-
-      // Add to new_games collection with only name
-      await addDoc(collection(db, "new_games"), { name: game.name });
+      // Add to new_games collection
+      const docRef = await addDoc(collection(db, "new_games"), gameData);
+      const newGame = { id: docRef.id, source: "new_games", ...gameData };
 
       // Clear cache to ensure fresh data
       Object.keys(pageCache).forEach((key) => delete pageCache[key]);
@@ -243,27 +359,17 @@ export const deleteGame = createAsyncThunk(
   "Games/delete",
   async (id, { dispatch, getState }) => {
     try {
-      // Get the game data before deletion to get the name
-      const gameSnapshot = await getDoc(doc(db, "Games", id));
-      const gameData = gameSnapshot.data();
+      // First check if the game exists in Games collection
+      const gamesDocRef = doc(db, "Games", id);
+      const gamesDocSnap = await getDoc(gamesDocRef);
 
-      // Delete from main Games collection
-      await deleteDoc(doc(db, "Games", id));
-
-      // Delete from new_games collection
-      if (gameData && gameData.name) {
-        // Query to find the document in new_games with matching name
-        const newGamesQuery = query(
-          collection(db, "new_games"),
-          where("name", "==", gameData.name)
-        );
-
-        const querySnapshot = await getDocs(newGamesQuery);
-
-        // Delete all matching documents
-        querySnapshot.forEach(async (doc) => {
-          await deleteDoc(doc.ref);
-        });
+      if (gamesDocSnap.exists()) {
+        // Game found in Games collection, delete it
+        await deleteDoc(gamesDocRef);
+      } else {
+        // Game not found in Games collection, try new_games
+        const newGamesDocRef = doc(db, "new_games", id);
+        await deleteDoc(newGamesDocRef);
       }
 
       // Clear cache to ensure fresh data
@@ -302,35 +408,56 @@ export const deleteGame = createAsyncThunk(
 // Update a game
 export const updateGame = createAsyncThunk(
   "Games/update",
-  async ({ id, ...gameData }, { dispatch, getState }) => {
+  async ({ id, source, ...gameData }, { dispatch, getState }) => {
     try {
-      // Get original game data to find matching document in new_games
-      const gameSnapshot = await getDoc(doc(db, "Games", id));
-      const originalGame = gameSnapshot.data();
-
-      // Update main Games collection
       const updatedData = {
         ...gameData,
         name: gameData.name,
       };
 
-      const gameRef = doc(db, "Games", id);
-      await updateDoc(gameRef, updatedData);
+      // Determine which collection to update based on source
+      if (source === "Games") {
+        // Update in Games collection
+        const gameRef = doc(db, "Games", id);
+        await updateDoc(gameRef, updatedData);
+      } else if (source === "new_games") {
+        // Update in new_games collection
+        const gameRef = doc(db, "new_games", id);
+        await updateDoc(gameRef, updatedData);
+      } else {
+        // If source is not provided, try to update in both collections
+        let updatedInGames = false;
+        let updatedInNewGames = false;
 
-      // Update in new_games collection
-      if (originalGame && originalGame.name) {
-        // Find the document in new_games with the original name
-        const newGamesQuery = query(
-          collection(db, "new_games"),
-          where("name", "==", originalGame.name)
-        );
+        try {
+          // Try to update in Games collection
+          const gameRef = doc(db, "Games", id);
+          const gameSnapshot = await getDoc(gameRef);
 
-        const querySnapshot = await getDocs(newGamesQuery);
+          if (gameSnapshot.exists()) {
+            await updateDoc(gameRef, updatedData);
+            updatedInGames = true;
+          }
+        } catch (error) {
+          console.log("Failed to update in Games collection", error);
+        }
 
-        // Update all matching documents with the new name
-        querySnapshot.forEach(async (doc) => {
-          await updateDoc(doc.ref, { name: gameData.name });
-        });
+        try {
+          // Try to update in new_games collection
+          const newGameRef = doc(db, "new_games", id);
+          const newGameSnapshot = await getDoc(newGameRef);
+
+          if (newGameSnapshot.exists()) {
+            await updateDoc(newGameRef, updatedData);
+            updatedInNewGames = true;
+          }
+        } catch (error) {
+          console.log("Failed to update in new_games collection", error);
+        }
+
+        if (!updatedInGames && !updatedInNewGames) {
+          throw new Error("Game not found in either collection");
+        }
       }
 
       // Clear cache for the affected pages
@@ -350,7 +477,7 @@ export const updateGame = createAsyncThunk(
       } else {
         dispatch(fetchGames({ page: currentPage, limit: gamesPerPage }));
       }
-      return { id, ...updatedData };
+      return { id, source, ...updatedData };
     } catch (error) {
       console.error("Error updating game:", error);
       throw error;
