@@ -46,9 +46,10 @@ const Dashboard = () => {
           Consoleposts: consolePostsCount.data().count,
           newConsoles: newConsolesCount.data().count,
           newGames: newGamesCount.data().count,
-          AllConsoles:
-            consolesCount.data().count + newConsolesCount.data().count,
-          AllGames: gamesCount.data().count + newGamesCount.data().count,
+          AllConsoles: consolesCount.data().count,
+          // + newConsolesCount.data().count,
+          AllGames: gamesCount.data().count,
+          // + newGamesCount.data().count,
         });
       } catch (error) {
         console.error("Error fetching data:", error);
