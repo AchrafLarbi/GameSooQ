@@ -2,25 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUserById } from "../../features/userSlice"; // Update path as needed
 
-const GameDetailsOverlay = ({ selectedGame, onClose }) => {
+const GameDetailsOverlay = ({ selectedConsolePost, onClose }) => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("Loading...");
 
   // Destructure the game properties from selectedGame
   const {
     condition,
-    created_At,
+    created_at,
     delivery,
     description,
-    gamename,
+    consolename,
     images,
     location,
-    platform,
+    price,
     post_id,
-    transaction_details,
-    transaction_type,
+    // status,
+    storage,
     user_id,
-  } = selectedGame || {};
+  } = selectedConsolePost || {};
 
   // Fetch user data when component mounts or user_id changes
   useEffect(() => {
@@ -58,7 +58,7 @@ const GameDetailsOverlay = ({ selectedGame, onClose }) => {
             {/* Title and close button positioned on top of image */}
             <div className="absolute inset-0 p-4 flex justify-between items-start z-10">
               <h1 className="text-3xl font-bold text-white">
-                {gamename || "Game Title"}
+                {consolename || "Game Title"}
               </h1>
               <button
                 className="text-xl font-bold text-white hover:text-gray-300"
@@ -96,11 +96,11 @@ const GameDetailsOverlay = ({ selectedGame, onClose }) => {
 
         {/* Info bar */}
         <div className="flex justify-between bg-black p-3">
+          {/* <div className="bg-purple-600 text-white px-4 py-2 rounded-full">
+            {status === "sell" ? "Vente" : "Exchange"}
+          </div> */}
           <div className="bg-purple-600 text-white px-4 py-2 rounded-full">
-            {transaction_type === "sell" ? "Vente" : "Exchange"}
-          </div>
-          <div className="bg-purple-600 text-white px-4 py-2 rounded-full">
-            {platform && platform.length > 0 ? platform[0] : "Platform"}
+            {storage}
           </div>
         </div>
 
@@ -125,7 +125,7 @@ const GameDetailsOverlay = ({ selectedGame, onClose }) => {
                   />
                 </svg>
               </span>
-              <span>{created_At || "Date"}</span>
+              <span>{created_at || "Date"}</span>
             </div>
             <div className="border border-purple-600 text-purple-600 px-4 py-2 rounded-full">
               {condition || "Condition"}
@@ -254,15 +254,11 @@ const GameDetailsOverlay = ({ selectedGame, onClose }) => {
 
         {/* Price */}
         <div className="bg-zinc-800 text-white p-4 flex justify-between items-center">
-          <h2 className="text-2xl font-bold">
-            {transaction_type === "sell" ? "Prix" : "Jeu"}
+          <div className="text-3xl font-bold">Price</div>
+          <h2 className="text-2xl font-bold ">
+            {price}
+            <span className="text-purple-400"> DA</span>
           </h2>
-          <div className="text-3xl font-bold">
-            {transaction_details || "0"}
-            {transaction_type === "sell" && (
-              <span className="text-purple-400"> DA</span>
-            )}
-          </div>
         </div>
       </div>
     </div>

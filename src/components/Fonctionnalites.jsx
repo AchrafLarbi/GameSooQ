@@ -86,7 +86,7 @@ const FeaturesSection = () => {
                 {/* Phone image with curved lines */}
                 <div className="absolute inset-0 flex items-center justify-center  ">
                   <FoncSvg
-                    className={`w-full h-full  ${
+                    className={`w-full h-full md:w-full md:h-full lg:w-full lg:h-full xl:w-full xl:h-full 2xl:w-full 2xl:h-full ultrawide:w-auto ultrawide:h-auto ultrawide:scale-150  ${
                       index % 2 === 0 ? "left-0" : "right-0"
                     }`}
                   />
@@ -129,7 +129,7 @@ const FeaturesSection = () => {
                       <Motion.img
                         src={feature.img || "/placeholder.svg"}
                         alt="GameSooq Mobile App Interface"
-                        className="w-5/12 xl:w-7/12 ultrawide:w-12/12 max-w-md mx-auto "
+                        className="w-5/12 xl:w-7/12 ultrawide:w-9/12 max-w-md mx-auto "
                         initial={{ scale: 0.95, rotate: -2 }}
                         animate={{
                           scale: 1,

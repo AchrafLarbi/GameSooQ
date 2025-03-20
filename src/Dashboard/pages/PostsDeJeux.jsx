@@ -35,9 +35,8 @@ export default function GamePostsPage() {
     totalPages,
     gamePostsPerPage,
     loading,
-    error,
+
     initialFetchDone,
-    searchResultsCount,
     filterApplied,
   } = useSelector((state) => state.gamePosts);
 
@@ -47,7 +46,8 @@ export default function GamePostsPage() {
   const [selectedGame, setSelectedGame] = useState(null);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [overlayOpen, setOverlayOpen] = useState(false);
-  const [loadingPosts, setLoadingPosts] = useState(false);
+  const [loadingPosts] = useState(false);
+  const [isAddButtonVisible] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -156,7 +156,7 @@ export default function GamePostsPage() {
     () => [
       {
         accessorKey: "gamename",
-        header: "Game Title",
+        header: "Titre ",
       },
       {
         accessorKey: "transaction_type",
@@ -164,7 +164,7 @@ export default function GamePostsPage() {
       },
       {
         accessorKey: "transaction_details",
-        header: "Price/Game",
+        header: "Prix/Jeu",
         cell: ({ row }) => {
           const price = row.transaction_details;
 
@@ -222,6 +222,7 @@ export default function GamePostsPage() {
         value={searchTerm}
         loading={isLoading}
         onRowClick={handleGameClick}
+        disappear={isAddButtonVisible}
       />
       <DeleteConfirmation
         isOpen={isDeleteOpen}

@@ -10,7 +10,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus } from "lucide-react";
 
-export const DataTable = ({ data, columns, onAdd, onSearch, value }) => {
+export const DataTable = ({
+  data,
+  columns,
+  onAdd,
+  onSearch,
+  value,
+  disappear,
+}) => {
   return (
     <div className="p-6 w-full  shadow-sm rounded-lg ">
       <div className="flex justify-between items-center mb-6">
@@ -21,14 +28,16 @@ export const DataTable = ({ data, columns, onAdd, onSearch, value }) => {
           onChange={onSearch}
           value={value}
         />
-        <Button
-          className="flex items-center gap-2 hover:bg-gray-300 hover:text-black hover:border-zinc-700 text-zinc-950 border rounded-xl"
-          onClick={onAdd}
-          variant="outline"
-        >
-          <Plus className="w-5 h-5" />
-          Ajouter
-        </Button>
+        {disappear && (
+          <Button
+            className="flex items-center gap-2 hover:bg-gray-300 hover:text-black hover:border-zinc-700 text-zinc-950 border rounded-xl"
+            onClick={onAdd}
+            variant="outline"
+          >
+            <Plus className="w-5 h-5" />
+            Ajouter
+          </Button>
+        )}
       </div>
 
       <Table className="w-full border border-black border-collapse">

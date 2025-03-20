@@ -37,6 +37,7 @@ export default function Consoles() {
   const [isMounted, setIsMounted] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
+  const [isAddButtonVisible] = useState(true);
 
   useEffect(() => {
     setIsMounted(true);
@@ -113,7 +114,7 @@ export default function Consoles() {
     () => [
       {
         accessorKey: "name",
-        header: "Name",
+        header: "Nom",
       },
       {
         id: "actions",
@@ -204,6 +205,7 @@ export default function Consoles() {
         onSearch={handleSearchChange}
         value={searchTerm}
         loading={loading}
+        disappear={isAddButtonVisible}
       />
 
       <ConsoleForm
