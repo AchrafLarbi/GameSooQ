@@ -9,6 +9,7 @@ export default function Form() {
     email: "",
     telephone: "",
     message: "",
+    reply_to: "", // Add this field
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,6 +39,7 @@ export default function Form() {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+      reply_to: name === "email" ? value : prev.reply_to, // Automatically update reply_to
     }));
   };
 
@@ -52,7 +54,10 @@ export default function Form() {
       .send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        formData,
+        {
+          ...formData,
+          reply_to: formData.email, // Explicitly send reply_to field
+        },
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(
