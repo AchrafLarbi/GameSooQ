@@ -32,8 +32,12 @@ const AcceuilPage = () => {
 
         {/* Download Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 sm:mt-10">
-          <a
-            href="#telecharge"
+          <button
+            onClick={() =>
+              document
+                .getElementById("telecharge")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
             className="group bg-[#FF5733] hover:bg-white hover:text-[#FF5733] hover:border-[#FF5733] text-white font-medium py-3 px-8 sm:px-10 lg:px-16 rounded-full flex items-center justify-center gap-2 transition-all duration-300 shadow-lg hover:shadow-xl hover:translate-y-[-2px] active:translate-y-[1px] w-full sm:w-auto border-2 border-transparent"
           >
             <span className="transition-colors duration-300">Télécharger</span>
@@ -53,7 +57,7 @@ const AcceuilPage = () => {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </button>
 
           <a
             href=""

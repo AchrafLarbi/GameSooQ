@@ -40,14 +40,18 @@ export default function Download() {
             </a>
 
             <div className="flex flex-col items-center">
-              <img
-                src={AppStore}
-                className="w-36 sm:w-44 md:w-48 h-auto opacity-50"
-                alt="Download on the App Store"
-              />
-              <p className="text-[13px] hidden sm:block opacity-80 font-medium my-3">
-                Disponible prochainement
-              </p>
+              <a
+                href="https://www.apple.com/fr/app-store/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+              >
+                <img
+                  src={AppStore}
+                  className="w-36 sm:w-44 md:w-48 h-auto "
+                  alt="Download on the App Store"
+                />
+              </a>
             </div>
           </div>
         </div>
