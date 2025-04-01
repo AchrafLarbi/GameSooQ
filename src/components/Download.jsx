@@ -27,7 +27,7 @@ export default function Download() {
 
           <div className="flex flex-row gap-4 justify-center sm:justify-start mt-5">
             <a
-              href="https://play.google.com/store"
+              href="https://play.google.com/store/apps/details?id=com.gamesooq.dz"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
@@ -41,7 +41,7 @@ export default function Download() {
 
             <div className="flex flex-col items-center">
               <a
-                href="https://www.apple.com/fr/app-store/"
+                href="https://testflight.apple.com/join/ZBWaJWqn"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
