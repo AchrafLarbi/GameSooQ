@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
 import header_icon from "../../assets/icons/header_icon.png";
 import { useNavigate } from "react-router-dom";
+import { FaXTwitter } from "react-icons/fa6";
 
 function Footer() {
   const [showModal, setShowModal] = useState(false);
@@ -147,17 +148,35 @@ function Footer() {
               et trouvez les meilleures offres près de chez vous !
             </p>
             <div className="flex justify-left space-x-4 mb-6">
-              <a href="#" className="hover:text-gray-400 transition-colors">
+              <a
+                href="https://www.facebook.com/profile.php?id=61573414071545"
+                className="hover:text-gray-400 transition-colors"
+              >
                 <FaFacebook size={20} />
               </a>
-              <a href="#" className="hover:text-gray-400 transition-colors">
+              <a
+                href="https://www.instagram.com/game_sooq/"
+                className="hover:text-gray-400 transition-colors"
+              >
                 <FaInstagram size={20} />
               </a>
-              <a href="#" className="hover:text-gray-400 transition-colors">
-                <FaTwitter size={20} />
+              <a
+                href="https://x.com/Gamesooqdz"
+                className="hover:text-gray-400 transition-colors"
+              >
+                <FaXTwitter size={20} />
               </a>
-              <a href="#" className="hover:text-gray-400 transition-colors">
+              <a
+                href="https://www.youtube.com/@GameSooq"
+                className="hover:text-gray-400 transition-colors"
+              >
                 <FaYoutube size={20} />
+              </a>
+              <a
+                href="https://www.tiktok.com/@gamesooq"
+                className="hover:text-gray-400 transition-colors"
+              >
+                <FaTiktok size={20} />
               </a>
             </div>
           </div>
