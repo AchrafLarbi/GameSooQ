@@ -56,14 +56,20 @@ const GameDetailsOverlay = ({ selectedGame, onClose }) => {
 
   return (
     // Overlay wrapper - centered on screen with semi-transparent background
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50 ">
+    <div
+      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+      onClick={onClose}
+    >
       {/* Overlay container */}
-      <div className="flex flex-col max-w-2xl w-full mx-auto bg-black text-white overflow-y-auto max-h-[90vh] rounded-3xl">
+      <div
+        className="flex flex-col max-w-5xl w-[95%] mx-auto bg-black text-white overflow-y-auto max-h-[95vh] rounded-3xl"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Main image background section with title on top */}
         <div className="relative">
           {/* Background image - increased height for fuller appearance */}
           <div
-            className="w-full h-96 bg-cover bg-center transition-all duration-300"
+            className="w-full h-[50vh] bg-cover bg-center transition-all duration-300"
             style={{
               backgroundImage:
                 images && images.length > 0
@@ -80,7 +86,7 @@ const GameDetailsOverlay = ({ selectedGame, onClose }) => {
                 {gamename || "Game Title"}
               </h1>
               <button
-                className="text-2xl font-bold text-white hover:text-gray-300 bg-black/30 rounded-full w-8 h-8 flex items-center justify-center"
+                className="text-3xl font-bold text-white hover:text-gray-300 bg-black/60 rounded-full w-12 h-12 flex items-center justify-center shadow-lg border-2 border-white/30"
                 onClick={onClose}
               >
                 ×
