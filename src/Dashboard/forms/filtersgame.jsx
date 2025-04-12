@@ -8,7 +8,8 @@ import {
   fetchGamePostsWithMultipleFilters,
   clearAllFilters,
   setCurrentFilter,
-} from "@/features/gamePostFilterSlice";
+  fetchAllFilterOptions,
+} from "@/features/gamePostSlice";
 
 const AdvancedFilterComponent = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const AdvancedFilterComponent = () => {
     activeFilter = null,
     searchResultsCount = 0,
     initialFetchDone = false,
-  } = useSelector((state) => state.gamePostsFilterSlice || {});
+    filterOptionsLoaded,
+  } = useSelector((state) => state.gamePosts || {});
 
   // State for dropdown visibility
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -33,11 +35,15 @@ const AdvancedFilterComponent = () => {
 
   // Fetch initial data if needed
   useEffect(() => {
+    // Load filter options on component mount
+    if (!filterOptionsLoaded) {
+      dispatch(fetchAllFilterOptions());
+    }
+
     if (!initialFetchDone) {
-      console.log("Triggering initial data fetch");
       dispatch(fetchGamePosts());
     }
-  }, [dispatch, initialFetchDone]);
+  }, [dispatch, initialFetchDone, filterOptionsLoaded]);
 
   // Update local state when redux state changes
   useEffect(() => {
@@ -133,7 +139,7 @@ const AdvancedFilterComponent = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-5 mb-6">
+    <div className="bg-gray-400 rounded-lg shadow-md p-4 my-6 mx-6 ">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold text-gray-800">Filter Game Posts</h2>
         {filterApplied && (
@@ -147,7 +153,7 @@ const AdvancedFilterComponent = () => {
         <div className="relative">
           <button
             onClick={() => toggleDropdown("platform")}
-            className="px-4 py-2 bg-gray-100 border border-gray-300 rounded-md flex items-center gap-2 hover:bg-gray-200 transition"
+            className="px-4 py-2 bg-white text-black border border-gray-300 rounded-md flex items-center gap-2 hover:bg-gray-200 transition"
           >
             <span>Platform</span>
             {selectedFilters.platform && (
@@ -198,7 +204,7 @@ const AdvancedFilterComponent = () => {
         <div className="relative">
           <button
             onClick={() => toggleDropdown("location")}
-            className="px-4 py-2 bg-gray-100 border border-gray-300 rounded-md flex items-center gap-2 hover:bg-gray-200 transition"
+            className="px-4 py-2 bg-white text-black border border-gray-300 rounded-md flex items-center gap-2 hover:bg-gray-200 transition"
           >
             <span>Location</span>
             {selectedFilters.location && (
@@ -225,7 +231,7 @@ const AdvancedFilterComponent = () => {
           </button>
 
           {openDropdown === "location" && (
-            <div className="absolute z-10 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
+            <div className="absolute z-10 mt-1 w-48  border border-gray-200 rounded-md shadow-lg">
               <div className="py-1 max-h-48 overflow-y-auto">
                 {availableFilters.locations.map((location) => (
                   <button
@@ -249,7 +255,7 @@ const AdvancedFilterComponent = () => {
         <div className="relative">
           <button
             onClick={() => toggleDropdown("transaction")}
-            className="px-4 py-2 bg-gray-100 border border-gray-300 rounded-md flex items-center gap-2 hover:bg-gray-200 transition"
+            className="px-4 py-2 bg-white text-black border border-gray-300 rounded-md flex items-center gap-2 hover:bg-gray-200 transition"
           >
             <span>Transaction</span>
             {selectedFilters.transaction_type && (
