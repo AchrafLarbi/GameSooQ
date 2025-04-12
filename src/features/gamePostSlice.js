@@ -48,7 +48,7 @@ export const fetchGamePosts = createAsyncThunk(
         pageCache[page] = snapshot.docs[snapshot.docs.length - 1];
       }
 
-      dispatch(setFilterApplied(false));
+      dispatch(setSearchApplied(false));
 
       return snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -232,7 +232,7 @@ export const searchGamePosts = createAsyncThunk(
       }
 
       // Set flags in state
-      dispatch(setFilterApplied(true));
+      dispatch(setSearchApplied(true));
       dispatch(setSearchQuery(searchQuery));
 
       // Update total count for search results
@@ -279,79 +279,6 @@ function clearSearchCache() {
   });
 }
 
-// Fetch game posts by platform
-export const fetchGamePostsByPlatform = createAsyncThunk(
-  "GamePosts/fetchByPlatform",
-  async ({ platform, page = 1, limit: pageLimit = 10 }, { dispatch }) => {
-    try {
-      const gamePostsRef = collection(db, "game_posts");
-      let q;
-
-      // First page or no cache
-      if (page === 1 || !pageCache[`platform_${platform}_${page - 1}`]) {
-        q = query(
-          gamePostsRef,
-          where("platform", "array-contains", platform),
-          orderBy("created_At", "desc"),
-          limit(pageLimit)
-        );
-      } else {
-        // For subsequent pages, use the startAfter with the cached document
-        const lastDoc = pageCache[`platform_${platform}_${page - 1}`];
-        q = query(
-          gamePostsRef,
-          where("platform", "array-contains", platform),
-          orderBy("created_At", "desc"),
-          startAfter(lastDoc),
-          limit(pageLimit)
-        );
-      }
-
-      const snapshot = await getDocs(q);
-
-      // Cache the last document for pagination
-      if (snapshot.docs.length > 0) {
-        pageCache[`platform_${platform}_${page}`] =
-          snapshot.docs[snapshot.docs.length - 1];
-      }
-
-      // Set flags in state
-      dispatch(setFilterApplied(true));
-
-      // Update total count for platform results
-      const countQuery = query(
-        gamePostsRef,
-        where("platform", "array-contains", platform)
-      );
-
-      const countSnapshot = await getCountFromServer(countQuery);
-      const total = countSnapshot.data().count;
-
-      // Calculate total pages
-      const totalPages = Math.ceil(total / pageLimit);
-      dispatch(setTotalPages(totalPages));
-
-      // Return both the data and the total for easier state updates
-      return {
-        items: snapshot.docs.map((doc) => {
-          const data = doc.data();
-          return {
-            id: doc.id,
-            ...data,
-            created_At: data.created_At
-              ? data.created_At.toDate().toISOString()
-              : null, // Convert Firestore Timestamp
-          };
-        }),
-        total,
-      };
-    } catch (error) {
-      console.error("Error fetching game posts by platform:", error);
-      throw error;
-    }
-  }
-);
-
 // Fetch game posts by user ID
 export const fetchGamePostsByUserId = createAsyncThunk(
   "GamePosts/fetchByUserId",
@@ -389,7 +316,7 @@ export const fetchGamePostsByUserId = createAsyncThunk(
       }
 
       // Set flags in state
-      dispatch(setFilterApplied(true));
+      dispatch(setSearchApplied(true));
 
       // Update total count for user posts
       const countQuery = query(gamePostsRef, where("user_id", "==", userId));
@@ -534,7 +461,7 @@ const gamePostsSlice = createSlice({
     setSearchQuery: (state, action) => {
       state.searchQuery = action.payload;
     },
-    setFilterApplied: (state, action) => {
+    setSearchApplied: (state, action) => {
       state.filterApplied = action.payload;
       if (!action.payload) {
         state.activeFilter = null;
@@ -639,33 +566,6 @@ const gamePostsSlice = createSlice({
         state.error = action.error.message;
         state.loading = false;
       })
-      .addCase(fetchGamePostsByPlatform.fulfilled, (state, action) => {
-        if (action.payload) {
-          if (action.payload.items) {
-            state.items = action.payload.items;
-            state.searchResultsCount = action.payload.total || 0;
-
-            if (action.payload.total !== undefined) {
-              state.totalPages = Math.ceil(
-                action.payload.total / state.gamePostsPerPage
-              );
-            }
-          } else {
-            state.items = action.payload;
-          }
-        }
-        state.loading = false;
-        state.initialFetchDone = true;
-        state.activeFilter = "platform";
-      })
-      .addCase(fetchGamePostsByPlatform.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchGamePostsByPlatform.rejected, (state, action) => {
-        state.error = action.error.message;
-        state.loading = false;
-      })
       .addCase(fetchGamePostsByUserId.fulfilled, (state, action) => {
         if (action.payload) {
           if (action.payload.items) {
@@ -720,7 +620,7 @@ export const {
   clearCurrentPost,
   clearSelectedPosts,
   setSearchQuery,
-  setFilterApplied,
+  setSearchApplied,
   setActiveFilter,
   setSearchResultsCount,
   clearPaginationCache,

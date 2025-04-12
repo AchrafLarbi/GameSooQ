@@ -5,7 +5,7 @@ import authReducer from "../features/authSlice";
 import gamePostReducer from "../features/gamePostSlice";
 import UsersSlice from "../features/userSlice";
 import ConsolePosts from "../features/consolePostSlice";
-
+import gamePostsFilters from "../features/gamePostFilterSlice";
 export const store = configureStore({
   reducer: {
     games: gameReducer,
@@ -14,5 +14,6 @@ export const store = configureStore({
     gamePosts: gamePostReducer,
     users: UsersSlice,
     consolePosts: ConsolePosts,
+    gamePostsFilterSlice: gamePostsFilters,
   },
 });

@@ -14,18 +14,15 @@ import { DeleteConfirmation } from "@/Dashboard/components/delete-confirmation";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchGamePosts,
-  fetchGamePostById,
   fetchTotalGamePostsCount,
-  fetchGamePostsByIds,
-  fetchGamePostsByPlatform,
-  fetchGamePostsByUserId,
   deleteGamePost,
   setCurrentPage,
   searchGamePosts,
-  setFilterApplied,
+  setSearchApplied,
   setTotalPages,
 } from "@/features/gamePostSlice";
 import GameDetailsOverlay from "../components/GameDetailsOverlay";
+import ArrowLeftAdvancedFilterComponent from "@/Dashboard/forms/filtersgame";
 
 export default function GamePostsPage() {
   const dispatch = useDispatch();
@@ -35,7 +32,6 @@ export default function GamePostsPage() {
     totalPages,
     gamePostsPerPage,
     loading,
-
     initialFetchDone,
     filterApplied,
   } = useSelector((state) => state.gamePosts);
@@ -97,7 +93,7 @@ export default function GamePostsPage() {
 
     const timeoutId = setTimeout(() => {
       dispatch(setCurrentPage(1));
-      dispatch(setFilterApplied(value.trim() !== ""));
+      dispatch(setSearchApplied(value.trim() !== ""));
 
       if (value.trim() === "") {
         dispatch(fetchTotalGamePostsCount()).then((action) => {
@@ -211,6 +207,7 @@ export default function GamePostsPage() {
 
   return (
     <div className="space-y-6 relative">
+      <ArrowLeftAdvancedFilterComponent />
       <DataTable
         title={
           filterApplied ? `Game Posts (Search: ${searchTerm})` : "Game Posts"
