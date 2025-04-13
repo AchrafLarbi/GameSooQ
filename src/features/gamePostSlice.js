@@ -599,6 +599,7 @@ export const fetchGamePostsWithMultipleFilters = createAsyncThunk(
 
       // Create a unique cache key based on all filter values
       const filterKey = Object.entries(filters)
+        // eslint-disable-next-line no-unused-vars
         .filter(([_, value]) => value !== null && value !== undefined)
         .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
         .map(([key, value]) => `${key}_${value}`)

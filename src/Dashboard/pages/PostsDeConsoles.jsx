@@ -18,10 +18,11 @@ import {
   deleteconsolepost,
   setCurrentPage,
   searchConsolePost,
-  setFilterApplied,
+  setSearchApplied,
   setTotalPages,
 } from "@/features/consolePostSlice";
 import ConsoleDetailsOverlay from "../components/ConsoleDetailsOverlay";
+import AdvancedFilterComponentConsole from "../forms/filtersconsole";
 
 export default function UserPage() {
   const dispatch = useDispatch();
@@ -92,7 +93,7 @@ export default function UserPage() {
 
     const timeoutId = setTimeout(() => {
       dispatch(setCurrentPage(1));
-      dispatch(setFilterApplied(value.trim() !== ""));
+      dispatch(setSearchApplied(value.trim() !== ""));
 
       if (value.trim() === "") {
         dispatch(fetchTotalConsolePostCount()).then((action) => {
@@ -207,6 +208,8 @@ export default function UserPage() {
 
   return (
     <div className="space-y-6 relative">
+      <AdvancedFilterComponentConsole />
+
       <DataTable
         title={
           filterApplied
