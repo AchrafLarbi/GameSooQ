@@ -402,7 +402,7 @@ export const fetchAllFilterOptions = createAsyncThunk(
 // Fetch game posts by location
 export const fetchConsolePostsByLocation = createAsyncThunk(
   "ConsolePosts/fetchByLocation",
-  async ({ location, page = 1, limit: pageLimit = 10 }, { dispatch }) => {
+  async ({ location, page = 1, limit: pageLimit = 5 }, { dispatch }) => {
     try {
       console.log("Fetching by location:", location, "page:", page);
       const consolePostsRef = collection(db, "console_posts");
@@ -490,7 +490,7 @@ export const fetchConsolePostsByLocation = createAsyncThunk(
 // Fetch game posts by transaction type
 export const fetchConsolePostsByStorage = createAsyncThunk(
   "ConsolePosts/fetchByStorage",
-  async ({ storage, page = 1, limit: pageLimit = 10 }, { dispatch }) => {
+  async ({ storage, page = 1, limit: pageLimit = 5 }, { dispatch }) => {
     try {
       console.log("Fetching by storage:", storage, "page:", page);
       const consolePostsRef = collection(db, "console_posts");
@@ -579,7 +579,7 @@ export const fetchConsolePostsByStorage = createAsyncThunk(
 // Combined multi-filter function
 export const fetchConsolePostsWithMultipleFilters = createAsyncThunk(
   "ConsolePosts/fetchWithFilters",
-  async ({ filters, page = 1, limit: pageLimit = 10 }, { dispatch }) => {
+  async ({ filters, page = 1, limit: pageLimit = 5 }, { dispatch }) => {
     try {
       console.log("Fetching with multiple filters:", filters, "page:", page);
       const consolePostsRef = collection(db, "console_posts");
@@ -726,6 +726,14 @@ export const clearAllFilters = createAsyncThunk(
 
       // Make sure we still have all filter options available
       dispatch(fetchAllFilterOptions());
+      const countSnapshot = await getCountFromServer(
+        collection(db, "console_posts")
+      );
+      const total = countSnapshot.data().count;
+
+      // Calculate total pages
+      const totalPages = Math.ceil(total / pageLimit);
+      dispatch(setTotalPages(totalPages));
 
       // Fetch regular posts
       return dispatch(fetchConsolePost({ page, limit: pageLimit })).unwrap();

@@ -21,6 +21,8 @@ const AdvancedFilterComponent = () => {
     searchResultsCount = 0,
     initialFetchDone = false,
     filterOptionsLoaded,
+    currentPage,
+    gamePostsPerPage,
   } = useSelector((state) => state.gamePosts || {});
 
   // State for dropdown visibility
@@ -128,6 +130,50 @@ const AdvancedFilterComponent = () => {
       );
     }
   };
+
+  // Handle page changes with active filters
+  useEffect(() => {
+    if (filterApplied && currentPage > 1) {
+      const activeFilters = Object.entries(currentFilter).filter(
+        // eslint-disable-next-line no-unused-vars
+        ([_, value]) => value !== null
+      ).length;
+
+      if (activeFilters > 1) {
+        dispatch(
+          fetchGamePostsWithMultipleFilters({
+            filters: currentFilter,
+            page: currentPage,
+            limit: gamePostsPerPage,
+          })
+        );
+      } else if (currentFilter.platform) {
+        dispatch(
+          fetchGamePostsByPlatform({
+            platform: currentFilter.platform,
+            page: currentPage,
+            limit: gamePostsPerPage,
+          })
+        );
+      } else if (currentFilter.location) {
+        dispatch(
+          fetchGamePostsByLocation({
+            location: currentFilter.location,
+            page: currentPage,
+            limit: gamePostsPerPage,
+          })
+        );
+      } else if (currentFilter.transaction_type) {
+        dispatch(
+          fetchGamePostsByTransactionType({
+            transactionType: currentFilter.transaction_type,
+            page: currentPage,
+            limit: gamePostsPerPage,
+          })
+        );
+      }
+    }
+  }, [currentPage, filterApplied, currentFilter, dispatch, gamePostsPerPage]);
 
   // Clear all filters
   const handleClearFilters = () => {
